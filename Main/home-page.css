@@ -1,0 +1,129 @@
+header
+{
+    background-color: #F74;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    position: relative;
+    top: 0px; right : 0px;
+
+}
+footer
+{
+    background-color: white;
+    width: 100%;
+}
+.nav_bar
+{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: solid 5px #e74;
+    position: relative;
+    top: 0px; right: 0 px;
+    padding: 5px;
+}
+.nav_bar a:hover
+{
+    background-color: #FA9;
+}
+.search_bar
+{
+    position: absolute;
+    bottom: 0px;
+    right: 50%;
+    transform: translate(50%, 0);
+    
+}
+.main_title
+{
+   margin: auto; 
+   position: ;
+}
+body
+{
+  background-color: ghostwhite;
+  text-align: justify;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+figure {
+  margin: 0 0 1rem;
+}
+
+img {
+  vertical-align: middle;
+  border: solid 1px black;
+}
+
+@media all {
+
+  .ArticleMainpage {width: 65%;}
+  .AsideHomepage {width: 25%;}
+  .articleHomepage {background-color: whitesmoke;border : inset lightblue 4px;margin: 3%;padding: 1%;overflow: hidden;} 
+  aside { background-color: whitesmoke;margin-top: 7%;margin-bottom: 7%; border: solid 8px slategrey;padding: 1%;}
+
+}
+@media all and (max-width: 1300px) {
+
+  .ArticleMainpage {width: 65%;}
+  .AsideHomepage {width: 25%;}
+  .articleHomepage {background-color: whitesmoke;border : inset lightblue 6px;margin: 3%;padding: 1%;overflow: hidden;} 
+  aside { background-color: whitesmoke;margin-top: 15%;margin-bottom: 15%; border: solid 8px lightslategrey;padding: 1%;}
+
+
+}
+@media all and (max-width: 800px) {
+
+  .ArticleMainpage {width: 100%; height: 30%; }
+  .AsideHomepage {width: 100%; height: 30%;}
+  .articleHomepage {background-color: whitesmoke;border : ridge lightblue 8px;margin: 3%;padding: 1%;overflow: hidden;} 
+aside { background-color: whitesmoke;border: inset 8px lightblue;padding: 1%;}
+}
+aside
+{
+    overflow: hidden;
+}
+
+.pictureArticle
+{
+    float: left;
+    margin: 1%;
+    width: 100px;
+    height: 150px;
+}
+.picture_logo
+{
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    top: 0px; right : 0px;
+    border: none;
+}
+.picture_drawingOfTheDay
+{
+    margin: 1%;
+    width: 250px;
+    height: 250px;
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: verdana;
+  font-size: 20px;
+  text-align: justify;
+}
+
+div.ExtraParagraph
+{
+    display: none;
+}
