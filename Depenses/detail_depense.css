@@ -1,15 +1,3 @@
-aside
-{
- border: blanchedalmond ridge medium;
- width: 50%;
-}
-
-aside img
-{
-margin: auto;
-width: 10%;
-}
-
 @media all {
 
     .ArticleMainpage {width: 65%;}
@@ -88,4 +76,7 @@ footer
 .main_title
 {
    position: relative;
+}
+img{
+    width: 100%;
 }
