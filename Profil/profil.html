@@ -19,11 +19,16 @@
 </header>
 <body>
     <h1>Profil</h1>
-    <aside>
+    
         <div><img src="Profil.svg" alt=""></div>
         <div>Nom d'utilisateur</div>
         <div>Adresse Mail</div>
-    </aside>
+        <div>
+            <label for="budget_mensuel">Selectionnez votre budget mensuel</label>
+            <input type="range" name="budget_mensuel" id="budget" min="0" max="10000000" step="20" value="1500" >
+            <output class="budget-output" for="budget_mensuel"></output>
+        </div>
+        
     
 
 </body>
