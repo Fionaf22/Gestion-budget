@@ -1,30 +1,47 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="profil.css">
-    <title>Profil</title>
-</head>
-<header class=HeaderHomepage>
-    <div class="nav_bar">
+  <head>
+    <meta charset="utf-8" />
+    <link href="creationCompte.css" rel="stylesheet" type="text/css" />
+    <title>Sign up - The worrisome optimist</title>
+  </head>
+
+  <body>
+    <header class="HeaderHomepage">
+      <div class="nav_bar">
         <a id="TVshows" href="./../Profil/profil.html">Profil</a>
-        <a href="./../Depenses/detail_depense.html" >Budget mensuel</a>
-        <a href="./../Planificateur/plan.html" >Planificateur de budget</a>
-        <a href="./../Achievements/Succes.html" >Achievements</a>
-    </div>	
-    <h1 class="main_title">The worrisome optimist</h1>
-    <div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
-    <div><a href="./../Main/home-page.html"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" class="picture_logo"> </a></div>
-</header>
-<body>
-    <h1>Profil</h1>
-    
-    <table>
+        <a href="./../Depenses/detail_depense.html">Budget mensuel</a>
+        <a href="./../Planificateur/plan.html">Planificateur de budget</a>
+        <a href="./../Achievements/Succes.html">Achievements</a>
+        <a href="./../Achievements/Succes.html">Sign in (A FAIRE)</a>
+        <a href="./../Profil/creationCompte.html">Sign up</a>
+      </div>
+      <h1 class="main_title">The worrisome optimist</h1>
+      <div class="search_bar">
+        <form><input type="text" placeholder="Search.." /></form>
+      </div>
+      <div>
+        <a href="./../Main/home-page.html"
+          ><img
+            src="./../Main/logo_home.png"
+            title="The worrisome optimist"
+            alt="logo du site"
+            class="picture_logo"
+          />
+        </a>
+      </div>
+    </header>
+
+    <div>
+      <h2>Configuration utilisateur</h2>
+    </div>
+    <form action="" method="get">
+      <table>
         <thead></thead>
         <tbody>
           <tr>
-            <th><label for="userpic">Modifier la photo de profil</label></th>
+            <th><label for="userpic">Ajouter une photo de profil</label></th>
             <td>
               <input
                 type="file"
@@ -42,7 +59,7 @@
                 class="form-control"
                 placeholder="first name"
                 value=""
-                readonly
+                required
               />
             </td>
           </tr>
@@ -54,7 +71,7 @@
                 class="form-control"
                 value=""
                 placeholder="surname"
-                readonly
+                required
               />
             </td>
           </tr>
@@ -66,8 +83,14 @@
                 class="form-control"
                 value=""
                 placeholder="username"
-                readonly
+                required
               />
+            </td>
+          </tr>
+          <tr>
+            <th><label for="password">Mot de passe (doit contenir entre 8 et 16 caractères dont au moins un chiffre et une lettre majuscule et minuscule)</label></th>
+            <td>
+                <input type="password" name="password" id="password" minlength="8" maxlength="16" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
             </td>
           </tr>
           <tr>
@@ -78,7 +101,7 @@
                 class="form-control"
                 placeholder="Paris"
                 value=""
-                readonly
+                required
               />
             </td>
           </tr>
@@ -90,7 +113,7 @@
                 class="form-control"
                 placeholder="abc59.@xxx.com"
                 value=""
-                readonly
+                required
               />
             </td>
           </tr>
@@ -100,15 +123,6 @@
           </tr>
         </tbody>
       </table>
-        
-        
-        <div>
-            <label for="budget_mensuel">Selectionnez votre budget mensuel</label>
-            <input type="range" name="budget" id="budget_mensuel" min="0" max="10000000" step="20" value="1500" >
-            <output class="budget-output" for="budget_mensuel"></output>
-        </div>
-        
-    
-
-</body>
+    </form>
+  </body>
 </html>
