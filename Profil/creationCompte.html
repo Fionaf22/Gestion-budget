@@ -36,12 +36,12 @@
     <div>
       <h2>Configuration utilisateur</h2>
     </div>
-    <form action="" method="get">
+    <form action="creationCompte.php" method="post">
       <table>
         <thead></thead>
         <tbody>
           <tr>
-            <th><label for="userpic">Ajouter une photo de profil</label></th>
+            <th><label for="userpic" class="labels">Ajouter une photo de profil</label></th>
             <td>
               <input
                 type="file"
@@ -52,37 +52,40 @@
             </td>
           </tr>
           <tr>
-            <th><label class="labels">Nom</label></th>
+            <th><label for="Lastname" class="labels">Nom</label></th>
             <td>
               <input
                 type="text"
+                name="Lastname"
                 class="form-control"
-                placeholder="first name"
+                placeholder="Nom de famille"
                 value=""
                 required
               />
             </td>
           </tr>
           <tr>
-            <th><label class="labels">Prénom</label></th>
+            <th><label for="Firstname" class="labels">Prénom</label></th>
             <td>
               <input
                 type="text"
+                name="Firstname"
                 class="form-control"
                 value=""
-                placeholder="surname"
+                placeholder="Prenom"
                 required
               />
             </td>
           </tr>
           <tr>
-            <th><label class="labels">Nom d'utilisateur</label></th>
+            <th><label for="Username" class="labels">Nom d'utilisateur</label></th>
             <td>
               <input
                 type="text"
+                name="Username"
                 class="form-control"
                 value=""
-                placeholder="username"
+                placeholder="Nom d'utilisateur"
                 required
               />
             </td>
@@ -94,10 +97,11 @@
             </td>
           </tr>
           <tr>
-            <th><label class="labels">Ville</label></th>
+            <th><label for="ville" class="labels">Ville</label></th>
             <td>
               <input
                 type="text"
+                name="Ville"
                 class="form-control"
                 placeholder="Paris"
                 value=""
@@ -106,10 +110,11 @@
             </td>
           </tr>
           <tr>
-            <th><label class="labels">Adresse E-mail</label></th>
+            <th><label for="Email" class="labels">Adresse E-mail</label></th>
             <td>
               <input
                 type="text"
+                name="Email"
                 class="form-control"
                 placeholder="abc59.@xxx.com"
                 value=""
@@ -124,5 +129,8 @@
         </tbody>
       </table>
     </form>
+
+
+
   </body>
 </html>
