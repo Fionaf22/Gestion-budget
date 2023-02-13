@@ -28,7 +28,10 @@ if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST')) 
 
 
 
-$sql = "CREATE TABLE if not exists `gestion_argent`.`$Username` (`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `couleur_depense` INT(15) NOT NULL , `type_Loyer` INT(15) NOT NULL , `type_Course` INT(15) NOT NULL , `type_Loisir` INT(15) NOT NULL , `idDepense` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
+$sqlCreate = "CREATE TABLE if not exists `gestion_argent`.$Username (`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `couleur_depense` INT(15) NOT NULL , `type_Loyer` INT(15) NOT NULL , `type_Course` INT(15) NOT NULL , `type_Loisir` INT(15) NOT NULL , `idDepense` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
+if (!mysqli_query($conn, $sqlCreate)) {
+    echo "Error: " . $sqlCreate . "<br>" . mysqli_error($conn);
+  }
 
 $sql = "INSERT INTO $Username (couleur_depense, detail_depense_text, date_depense, type_Loyer, type_Course, type_Loisir) VALUES (\"$couleur_depense\" , \"$detail_depense_text\" , \"$date_depense\" , \"$type_Loyer\" , \"$type_Course\" , \"$type_Loisir\" );";
 
