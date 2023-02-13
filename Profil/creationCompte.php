@@ -5,36 +5,32 @@
 <body>
 <?php
 
-echo '<p>Hello World</p>'; 
-$con = mysqli_connect("localhost"," root@localhost","","gesion_argent");
+$conn = mysqli_connect("localhost","root","","gestion_argent");
 
 // define variables and set to empty values
-/*$userpic = */$Lastname = $Firstname = $Username = $ville = $Email = $password = "";
+/*$userpic = */$Lastname = $Firstname = $Username = $Ville = $Email = $passwords = "";
 
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
-echo "Connected successfully";
+//echo "Connected successfully";
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST')) {
   //$userpic = test_input($_POST["userpic"]);
   $Lastname = test_input($_POST["Lastname"]);
-  $ville = test_input($_POST["ville"]);
+  $Ville = test_input($_POST["Ville"]);
   $Username = test_input($_POST["Username"]);
   $Firstname = test_input($_POST["Firstname"]);
   $Email = test_input($_POST["Email"]);
-  $password = test_input($_POST["password"]);
+  $passwords = test_input($_POST["passwords"]);
 }
 
 
 
-$sql = "INSERT INTO profils (/*userpic, */Lastname, Firstname, Username, ville, Email, 'Password')
-VALUES (/*$userpic , */$Lastname , $Firstname , $Username , $ville , $Email , $password )";
+$sql = "INSERT INTO profils (Lastname, Firstname, Username, Ville, Email, passwords) VALUES (\"$Lastname\" , \"$Firstname\" , \"$Username\" , \"$Ville\" , \"$Email\" , \"$passwords\" );";
 
-if (mysqli_query($conn, $sql)) {
-  echo "New record created successfully";
-} else {
+if (!mysqli_query($conn, $sql)) {
   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
