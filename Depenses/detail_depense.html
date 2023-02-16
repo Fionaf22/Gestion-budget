@@ -18,49 +18,90 @@
     <div><a href="./../Main/home-page.html"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" class="picture_logo"> </a></div>
 </header>
 <body>
-    <h1>Details</h1>
-    <form action="detail_depense.php" method="post" class="form_depense">
+    
         
-        <div>
-            <label for="Username" class="labels">Nom d'utilisateur</label>
-            <input
-                type="text"
-                name="Username"
-                class="form-control"
-                value=""
-                placeholder="Nom d'utilisateur"
-                required
-              />
+    <form action="detail_depense.php" method="post" class="form_depense">
+        <fieldset>
+        <legend>Ajouter une dépense</legend>
+        <div class="table-color-radio">
+            <table>
+                <tr>
+                    <td style="background-color: rgba(230, 0, 0, 0.650)">
+                        <input type="radio" id="red" name="drone" value="red" checked>
+                        <label for="red" >red</label>
+                    </td>
+
+                    <td style="background-color: rgba(0, 0, 230, 0.700)">
+                        <input type="radio" id="blue" name="drone" value="blue">
+                        <label for="blue">blue</label>
+                    </td>
+                    <td style="background-color: rgba(0, 230, 0, 0.650)">
+                        <input type="radio" id="green" name="drone" value="green">
+                        <label for="green">green</label>
+                    </td>
+                    <td style="background-color: rgba(150, 0, 230, 0.65)">
+                        <input type="radio" id="violet" name="drone" value="violet">
+                 <label for="violet">violet</label>
+                    </td>
+                    <td style="background-color: rgba(255, 130, 41, 0.65)">
+                        <div>
+                            <input type="radio" id="orange" name="orange" value="orange">
+                            <label for="orange">orange</label>
+                          </div>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div>
-            <label for="couleur_depense">Code couleur</label> 
-            <input type="color" name="couleur_depense" id="couleur_depense">
-        </div>
+        <br>
         <div>
             <label for="detail_depense_text">Titre de la dépense</label>
-            <input type="text" name="detail_depense_text" id="detail_depense_text">
+            <input type="text" name="detail_depense_text" id="detail_depense_text" size="31">
         </div>
         <div>
             <label for="date_depense">Date de la dépense</label> 
             <input type="date" name="date_depense" id="date_depense">
         </div>
 
-        <div>
-            <div>Type de dépense</div>
-            <label for="type_Loyer">Loyer </label> 
-            <input type="radio" name="type_Loyer" id="type_Loyer">
-
-            <label for="type_Course">Course</label> 
-            <input type="radio" name="type_Course" id="type_Course">
-
-            <label for="type_Loisir">Loisir</label> 
-            <input type="radio" name="type_Loisir" id="type_Loisir">
-
+        <div class="input_optgroup">
+            <label for="Type-depense-select">Type de dépense</label>
+            <select id="Type-depense-select">
+                <optgroup label="Dépense fixes">
+                    <option>Loyer</option>
+                    <option>Remboursements crédit</option>
+                    <option>Factures</option>
+                    <option>>Abonnements</option>
+                    <option>Education</option>
+                    <option>Autres Dépenses Fixes</option>
+                </optgroup>
+                <optgroup label="Dépense courantes">
+                    <option>Alimentation</option>
+                    <option>Essence</option>
+                    <option>Pharmacie</option>
+                    <option>Garderie</option>
+                    <option>Loisirs</option>
+                    <option>Autres Dépenses Courantes</option>
+                </optgroup>
+                <optgroup label="Dépense occasionnelles">
+                    <option>Vetements</option>
+                    <option>Cadeaux</option>
+                    <option>Entretien et réparation de son véhicule</option>
+                    <option>Vacances</option>
+                    <option>Restaurants</option>
+                    <option>Cinema/Theatre</option>
+                    <option>Autres Dépenses Occasionnelles</option>
+                </optgroup>
+            </select>
         </div>
         <div>
-            <label for="envoi">null</label> 
+            <label for="note_depense">Informations complémentaires</label>
+            <div><textarea id="note_depense" name="note_depense" rows="5" cols="48" maxlength="200"></textarea></div>
+        </div>
+        <div>
+            <label for="envoi"></label> 
+            <input type="reset" value="Reset">
             <input type="submit" value="Envoyer">
         </div>
+    </fieldset>
     </form>
 </body>
 </html>
