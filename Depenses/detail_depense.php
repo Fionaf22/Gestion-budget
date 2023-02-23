@@ -33,7 +33,7 @@ if (!mysqli_query($conn, $sqlCreate)) {
     echo "Error: " . $sqlCreate . "<br>" . mysqli_error($conn);
   }
 
-$sql = "INSERT INTO $Username (couleur_depense, detail_depense_text, date_depense, type_Loyer, type_Course, type_Loisir) VALUES (\"$couleur_depense\" , \"$detail_depense_text\" , \"$date_depense\" , \"$type_Loyer\" , \"$type_Course\" , \"$type_Loisir\" );";
+$sql = "INSERT INTO Username (couleur_depense, detail_depense_text, date_depense, type_Loyer, type_Course, type_Loisir) VALUES (\"$couleur_depense\" , \"$detail_depense_text\" , \"$date_depense\" , \"$type_Loyer\" , \"$type_Course\" , \"$type_Loisir\" );";
 
 if (!mysqli_query($conn, $sql)) {
   echo "Error: " . $sql . "<br>" . mysqli_error($conn);

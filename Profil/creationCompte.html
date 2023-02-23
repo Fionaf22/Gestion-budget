@@ -97,6 +97,12 @@
             </td>
           </tr>
           <tr>
+            <th><label for="passwords_verif">Mot de passe (doit contenir entre 8 et 16 caractères dont au moins un chiffre et une lettre majuscule et minuscule)</label></th>
+            <td>
+                <input type="password" name="passwords_verif" id="passwords_verif" minlength="8" maxlength="16" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
+            </td>
+          </tr>
+          <tr>
             <th><label for="Ville" class="labels">Ville</label></th>
             <td>
               <input

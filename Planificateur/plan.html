@@ -1,139 +1,312 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="plan.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="plan.css" />
     <title>Depense</title>
-</head>
-<header class=HeaderHomepage>
+  </head>
+  <header class="HeaderHomepage">
     <div class="nav_bar">
-        <a id="TVshows" href="./../Profil/profil.html">Profil</a>
-        <a href="./../Depenses/detail_depense.html" >Budget mensuel</a>
-        <a href="./../Planificateur/plan.html" >Planificateur de dépenses</a>
-        <a href="./../Achievements/Succes.html" >Achievements</a>
-    </div>	
+      <a id="TVshows" href="./../Profil/profil.html">Profil</a>
+      <a href="./../Depenses/detail_depense.html">Budget mensuel</a>
+      <a href="./../Planificateur/plan.html">Planificateur de dépenses</a>
+      <a href="./../Achievements/Succes.html">Achievements</a>
+    </div>
     <h1 class="main_title">The worrisome optimist</h1>
-    <div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
-    <div><a href="./../Main/home-page.html"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" class="picture_logo"> </a></div>
-</header>
-<body>
+    <div class="search_bar">
+      <form><input type="text" placeholder="Search.." /></form>
+    </div>
+    <div>
+      <a href="./../Main/home-page.html"
+        ><img
+          src="./../Main/logo_home.png"
+          title="The worrisome optimist"
+          alt="logo du site"
+          class="picture_logo"
+        />
+      </a>
+    </div>
+  </header>
+  <body>
     <h1>Planificateur de dépenses</h1>
-    <form action="" method="get">
-        <label for="mois">Pour le mois de</label>
-        <input type="month" name="mois" id="mois" required>
-    <table>
-        <thead><tr>
-            <th colspan="2">
-              <label for="detail_depense_text">Dépenses Fixes</label>
-            </th>
-          </tr></thead>
-        <tbody>
-            <tr>
-                <th><label for="loyer">Loyer</label></th>
-                <td><input type="number" name="" id="loyer"></td>
-            </tr>
-            <tr>
-                <th><label for="dettes">Remboursement crédit</label></th>
-                <td><input type="number" name="" id="dettes"></td>
-            </tr>
-            <tr>
-                <th><label for="facture">Factures</label></th>
-                <td><input type="number" name="" id="facture"></td>
-            </tr>
-            <tr>
-                <th><label for="abonnement">Abonnements</label></th>
-                <td><input type="number" name="" id="abonnement"></td>
-            </tr>
-            <tr>
-                <th><label for="assurances">Assurances</label></th>
-                <td><input type="number" name="" id="assurances"></td>
-            </tr>
-            <tr>
-                <th><label for="ecole">Education</label></th>
-                <td><input type="number" name="" id="ecole"></td>
-            </tr>
-            <tr>
-                <th><label for="autreFixes">Autres Dépenses Fixes</label></th>
-                <td><input type="number" name="" id="autreFixes"></td>
-            </tr>
-        </tbody>
-    </table>
 
-    <table>
-        <thead>
+    
+    <!-- Formulaires des dépenses-->
+    <form action="plan.php" method="post">
+      <label for="mois">Pour le mois de</label>
+      <input type="month" name="mois" id="mois" required />
+      <div class="table-depense">
+        <!-- Formulaire des dépenses fixes-->
+        <table>
+          <thead>
             <tr>
-                <th colspan="2">
-                  <label for="detail_depense_text">Dépenses Courantes</label>
-                </th>
-              </tr>
-        </thead>
-        <tbody>
+              <th colspan="2">
+                <label for="detail_depense_text">Dépenses Fixes</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
             <tr>
-                <th><label for="Alimentation">Alimentation</label></th>
-                <td><input type="number" name="Alimentation" id="Alimentation"></td>
+              <th><label for="loyer">Loyer</label></th>
+              <td>
+                <input type="number" min="0" max="100000" name="" id="loyer" />
+              </td>
             </tr>
             <tr>
-                <th><label for="Essence">Essence</label></th>
-                <td><input type="number" name="Essence" id="Essence"></td>
+              <th><label for="dettes">Remboursement crédit</label></th>
+              <td>
+                <input type="number" min="0" max="100000" name="" id="dettes" />
+              </td>
             </tr>
             <tr>
-                <th><label for="Pharmacie">Pharmacie</label></th>
-                <td><input type="number" name="Pharmacie" id="Pharmacie"></td>
+              <th><label for="facture">Factures</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name=""
+                  id="facture"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="Garderie">Garderie</label></th>
-                <td><input type="number" name="Garderie" id="Garderie"></td>
+              <th><label for="abonnement">Abonnements</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name=""
+                  id="abonnement"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="Loisirs">Loisirs</label></th>
-                <td><input type="number" name="Loisirs" id="Loisirs"></td>
+              <th><label for="assurances">Assurances</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name=""
+                  id="assurances"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="autreCourantes">Autres Dépenses Courantes</label></th>
-                <td><input type="number" name="autreCourantes" id="autreCourantes"></td>
-            </tr>
-        </tbody>
-    </table>
-
-    <table>
-        <thead><tr>
-            <th colspan="2">
-              <label for="detail_depense_text">Dépenses Occasionnelles</label>
-            </th>
-          </tr></thead>
-        <tbody>
-            <tr>
-                <th><label for="Vetement">Vetements</label></th>
-                <td><input type="number" name="Vetement" id="Vetement"></td>
+              <th><label for="ecole">Education</label></th>
+              <td>
+                <input type="number" min="0" max="100000" name="" id="ecole" />
+              </td>
             </tr>
             <tr>
-                <th><label for="Cadeaux">Cadeaux</label></th>
-                <td><input type="number" name="Cadeaux" id="Cadeaux"></td>
+              <th><label for="autreFixes">Autres Dépenses Fixes</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name=""
+                  id="autreFixes"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Formulaire des dépenses courantes-->
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">
+                <label for="detail_depense_text">Dépenses Courantes</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><label for="Alimentation">Alimentation</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Alimentation"
+                  id="Alimentation"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="voiture">Entretien et réparation de son véhicule</label></th>
-                <td><input type="number" name="voiture" id="voiture"></td>
+              <th><label for="Essence">Essence</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Essence"
+                  id="Essence"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="Vacances">Vacances</label></th>
-                <td><input type="number" name="Vacances" id="Vacances"></td>
+              <th><label for="Pharmacie">Pharmacie</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Pharmacie"
+                  id="Pharmacie"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="Restaurant">Restaurant</label></th>
-                <td><input type="number" name="Restaurant" id="Restaurant"></td>
+              <th><label for="Garderie">Garderie</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Garderie"
+                  id="Garderie"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="Cinema">Cinema/Theatre</label></th>
-                <td><input type="number" name="Cinema" id="Cinema"></td>
+              <th><label for="Loisirs">Loisirs</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Loisirs"
+                  id="Loisirs"
+                />
+              </td>
             </tr>
             <tr>
-                <th><label for="autreOccasionnelles">Autres Dépenses Occasionnelles</label></th>
-                <td><input type="number" name="autreOccasionnelles" id="autreOccasionnelles"></td>
+              <th>
+                <label for="autreCourantes">Autres Dépenses Courantes</label>
+              </th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="autreCourantes"
+                  id="autreCourantes"
+                />
+              </td>
             </tr>
-        </tbody>
-    </table>
-    <div><input type="submit" value="Envoyer" /></div>
-</form>
-</body>
+          </tbody>
+        </table>
+        <!-- Formulaire des dépenses occasionnelles-->
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">
+                <label for="detail_depense_text">Dépenses Occasionnelles</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><label for="Vetement">Vetements</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Vetement"
+                  id="Vetement"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Cadeaux">Cadeaux</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Cadeaux"
+                  id="Cadeaux"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label for="Voiture"
+                  >Entretien et réparation de son véhicule</label
+                >
+              </th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Voiture"
+                  id="Voiture"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Vacances">Vacances</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Vacances"
+                  id="Vacances"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Restaurant">Restaurant</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Restaurant"
+                  id="Restaurant"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Cinema">Cinema/Theatre</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Cinema"
+                  id="Cinema"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label for="autreOccasionnelles"
+                  >Autres Dépenses Occasionnelles</label
+                >
+              </th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="autreOccasionnelles"
+                  id="autreOccasionnelles"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div><input type="submit" value="Envoyer" /></div>
+    </form>
+  </body>
 </html>

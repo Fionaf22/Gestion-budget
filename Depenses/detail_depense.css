@@ -82,7 +82,7 @@ img{
 }
 
 td,th {
-    border: 1px solid rgb(190, 190, 190);
+    border: 1px solid rgba(0, 0, 255, .2);
     padding: 10px;
 }
 
@@ -107,8 +107,10 @@ fieldset{
     padding-bottom: 10px;
     text-align: center; 
     margin: auto;
-    margin-top: 15%;
+    margin-top: 5%;
     width: 70%;
+    max-width: 700px;
+    min-height: 300px;
     background-color: #fff5f2;
     display: flex;
     justify-content: space-evenly;
@@ -130,5 +132,5 @@ body{
     background: -moz-radial-gradient(top,   #ffccb8 100%, #ffded1 50%, #fce5dc 0%);
     background: -webkit-radial-gradient(top,  #ffccb8 100%, #ffded1 50%, #fce5dc 0%);
     background: linear-gradient(to bottom,  #ffccb8 100%, #ffded1 50%, #fce5dc 0%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffccb8', endColorstr='#fce5dc',GradientType=1 );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fce5dc', endColorstr='#ffccb8',GradientType=1 );
 }
