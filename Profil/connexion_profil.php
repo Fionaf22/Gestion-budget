@@ -1,4 +1,8 @@
 <?php
+//session_start();
+//$_SESSION['login']=$username;
+//$_SESSION['password']=password_hash($password, PASSWORD_DEFAULT);
+
 define('DB_SERVER', 'localhost');
 define('DB_USERNAME', 'username');
 define('DB_PASSWORD', '');

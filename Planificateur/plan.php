@@ -1,8 +1,9 @@
 <?php
+session_start();
 // Les informations de connexion à la base de données
 
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'username');
+define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'gestion_argent');
 $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -79,16 +80,13 @@ if ($conn->connect_error) {
     die("Connexion échouée: " . $conn->connect_error);
 }
 
-//a modifier, chaque utilisateur à sa table et pour chaque utilisateur on cree une table,
-// il y a une entree par mois à chaque modif de la tableon update le contenue. 
-//à la base toue est zero mais quand on remplie le form une fois les valeurs de base 
-//sont celle dernierement indiqué et chaque modif des valeur = update de la table.
 
-
+$_SESSION['login']='marc';
+$user=$_SESSION['login'];
 // Création d'une table pour stocker les données du formulaire
-$sql = "CREATE TABLE IF NOT EXISTS depense" . $user . "(
+$sql = "CREATE TABLE IF NOT EXISTS depense_" . $user . "(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    mois DATE NOT NULL,
+    mois varchar (100) NOT NULL,
     loyer decimal(6,2),
     dettes decimal(6,2),
     facture decimal(6,2),
@@ -118,18 +116,35 @@ if ($conn->query($sql) === TRUE) {
     echo "Erreur de création de table: " . $conn->error;
 }
 
-// Insertion des données du formulaire dans la table depenses
 
-$sql = "INSERT INTO depense" . $user . " (mois, loyer, dettes, facture, abonnement, assurances, ecole, autreFixes, Alimentation, Essence, Pharmacie, Garderie, Loisirs, autreCourantes, Vetement, Cadeaux, Voiture, Vacances, Restaurant, Cinema, autreOccasionnelles) VALUES ( $mois, $loyer, $dettes, $facture, $abonnement, $assurances, $ecole, $autreFixes, $Alimentation, $Essence, $Pharmacie, $Garderie, $Loisirs, $autreCourantes, $Vetement, $Cadeaux, $Voiture, $Vacances, $Restaurant, $Cinema, $autreOccasionnelles)";
+//a modifier, chaque utilisateur à sa table et pour chaque utilisateur on cree une table,
+// il y a une entree par mois à chaque modif de la tableon update le contenue. 
+//à la base toue est zero mais quand on remplie le form une fois les valeurs de base 
+//sont celle dernierement indiqué et chaque modif des valeur = update de la table.
+//. "where depense_" . $user. ".mois =  2035"
+$sqlMonth="select mois from depense_" . $user;
+$resultAll = $conn->query($sqlMonth);
+
+if (mysqli_num_rows($resultAll) > 0) {
+	while($rowData = mysqli_fetch_array($resultAll)){
+  		echo $rowData["mois"].'<br>';
+	}
+}
+
+
+// Insertion des données du formulaire dans la table depenses
+$sql = "INSERT INTO depense_" . $user . " (mois, loyer, dettes, facture, abonnement, assurances, ecole, autreFixes, Alimentation, Essence, Pharmacie, Garderie, Loisirs, autreCourantes, Vetement, Cadeaux, Voiture, Vacances, Restaurant, Cinema, autreOccasionnelles) VALUES ( \"$mois\", $loyer, $dettes, $facture, $abonnement, $assurances, $ecole, $autreFixes, $Alimentation, $Essence, $Pharmacie, $Garderie, $Loisirs, $autreCourantes, $Vetement, $Cadeaux, $Voiture, $Vacances, $Restaurant, $Cinema, $autreOccasionnelles)";
+if (!mysqli_query($conn, $sql)) {
+  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+
 
 // à chaque modif du formulaire, il faut update la table des données, nouvelle entree seulement si c'est pour un nouveau mois.
 // faire un trigger after update, if new month = old month alors data are modified
 
 //afficher les données dans un tableau
 
-if (!mysqli_query($conn, $sql)) {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
+
 
 mysqli_close($conn);
 ?>

@@ -1,12 +1,19 @@
-<html>
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Création compte</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creation de compte</title>
 </head>
 <body>
 <?php
 
 define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'username');
+define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'gestion_argent');
 
@@ -48,16 +55,22 @@ if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST')) 
   $passwords_verif = test_input($_POST["passwords_verif"]);
 
   // Check if the passwords match
-  if ($password != $passwords_verif) {
+  if ($passwords != $passwords_verif) {
     echo "Passwords do not match.";
     exit();
   }
 
   // Hash the password
-  $password = password_hash($password, PASSWORD_DEFAULT);
+  $passwords = password_hash($passwords, PASSWORD_DEFAULT);
+
+  $_SESSION['login']=$Username;
+  $_SESSION['password']=$passwords;
+
+  $sql= "CREATE TABLE if not exists profil (`Lastname` VARCHAR(100) NOT NULL, `Firstname` VARCHAR(100) NOT NULL, `Username` VARCHAR(100) NOT NULL, `Ville` VARCHAR(100) NOT NULL, `Email` VARCHAR(100) NOT NULL, `passwords` VARCHAR(100) NOT NULL,  `idProfil` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`idProfil`)) ENGINE = InnoDB;";
+  mysqli_query($conn, $sql);
 
 	// Insert the user's information into the database
-	$sql = "INSERT INTO profils (Lastname, Firstname, Username, Ville, Email, passwords) VALUES (\"$Lastname\" , \"$Firstname\" , \"$Username\" , \"$Ville\" , \"$Email\" , \"$passwords\" );";
+	$sql = "INSERT INTO profil (Lastname, Firstname, Username, Ville, Email, passwords) VALUES (\"$Lastname\" , \"$Firstname\" , \"$Username\" , \"$Ville\" , \"$Email\" , \"$passwords\" );";
 
 	if (mysqli_query($conn, $sql)) {
 		echo "User registered successfully.";

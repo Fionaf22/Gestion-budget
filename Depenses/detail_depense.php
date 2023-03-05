@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <html>
 <head>
 <title>Ajout depense</title>
@@ -17,23 +20,20 @@ echo "Connected successfully";
 
 
 if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST')) {
-  $Username = test_input($_POST["Username"]);
-  $couleur_depense = test_input($_POST["couleur_depense"]);
-  $type_Loyer = test_input($_POST["type_Loyer"]);
+  
+  $couleur_depense = test_input($_POST["drone"]);
+  $type_depense = test_input($_POST["Type-depense-select"]);
   $date_depense = test_input($_POST["date_depense"]);
   $detail_depense_text = test_input($_POST["detail_depense_text"]);
-  $type_Course = test_input($_POST["type_Course"]);
-  $type_Loisir = test_input($_POST["type_Loisir"]);
 }
+$Username = $_SESSION['login'];
 
-
-
-$sqlCreate = "CREATE TABLE if not exists `gestion_argent`.$Username (`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `couleur_depense` INT(15) NOT NULL , `type_Loyer` INT(15) NOT NULL , `type_Course` INT(15) NOT NULL , `type_Loisir` INT(15) NOT NULL , `idDepense` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
+$sqlCreate = "CREATE TABLE if not exists `gestion_argent`.$Username ( `idDepense` INT NOT NULL AUTO_INCREMENT ,`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `couleur_depense` INT(15) NOT NULL , `type_depense` VARCHAR(100) NOT NULL , PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
 if (!mysqli_query($conn, $sqlCreate)) {
     echo "Error: " . $sqlCreate . "<br>" . mysqli_error($conn);
   }
 
-$sql = "INSERT INTO Username (couleur_depense, detail_depense_text, date_depense, type_Loyer, type_Course, type_Loisir) VALUES (\"$couleur_depense\" , \"$detail_depense_text\" , \"$date_depense\" , \"$type_Loyer\" , \"$type_Course\" , \"$type_Loisir\" );";
+$sql = "INSERT INTO `gestion_argent`.$Username (couleur_depense, detail_depense_text, date_depense,type_depense) VALUES (\"$couleur_depense\" , \"$detail_depense_text\" , \"$date_depense\",   \"$type_depense\" );";
 
 if (!mysqli_query($conn, $sql)) {
   echo "Error: " . $sql . "<br>" . mysqli_error($conn);
