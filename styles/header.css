@@ -1,0 +1,60 @@
+header
+{
+    background-color: #F74;
+    width: 100%;
+    max-height: 30vh;
+    min-height: 8.3rem ;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    top: 0px; right : 0px;
+
+}
+
+.middle_header
+{
+  display: flex;
+  flex-direction: column;
+  align-items:baseline;
+  justify-content:space-between;
+}
+
+.picture_logo_header img
+{
+    max-width: 15vw;
+    max-height: 15vh;
+    position: relative;
+    margin: auto;
+}
+
+.nav_bar
+{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    border: solid 5px #e74;
+    position: relative;
+    top: 0px; right: 0 px;
+    padding: 5px;
+    min-height: 7rem ;
+    max-height: 25vh;
+}
+.nav_bar a:hover
+{
+    background-color: #FA9;
+}
+
+.main_title
+{
+  margin: auto;
+   font-size:5vw;
+   color: aquamarine;
+}
+.search_bar{
+  margin: auto;
+}

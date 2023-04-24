@@ -1,152 +1,301 @@
-<?php
-session_start();
-// Les informations de connexion à la base de données
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./../styles/plan.css" />
+    <link href="./../styles/header.css" rel="stylesheet">
+    <title>Depense</title>
+  </head>
+  <header class="HeaderHomepage">
+		<div class="nav_bar">
+			<?php include './../scr/menu.php';?>
+		</div>
+    <h1 class="main_title">The worrisome optimist</h1>
+    <div class="search_bar">
+      <form><input type="text" placeholder="Search.." /></form>
+    </div>
+    <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" > </a></div>
+</header>
+  <body>
+    <h1>Planificateur de dépenses</h1>
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'gestion_argent');
-$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-// Les données du formulaire
-
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  } 
-
-$mois = test_input($_POST['mois']);
-$loyer = test_input($_POST['loyer']);
-$dettes = test_input($_POST['dettes']);
-$facture = test_input($_POST['facture']);
-$abonnement = test_input($_POST['abonnement']);
-$assurances = test_input($_POST['assurances']);
-$ecole = test_input($_POST['ecole']);
-$autreFixes = test_input($_POST['autreFixes']);
-
-$depFixes=[
-    'mois' => $mois, 
-    'loyer'=> $loyer ,
-    'dettes'=> $dettes,
-    'facture'=> $facture,
-    'abonnement'=> $abonnement, 
-    'assurances'=> $assurances, 
-    'ecole'=> $ecole,
-    'autreFixes'=> $autreFixes
-];
-
-$Alimentation = test_input($_POST['Alimentation']);
-$Essence = test_input($_POST['Essence']);
-$Pharmacie = test_input($_POST['Pharmacie']);
-$Garderie = test_input($_POST['Garderie']);
-$Loisirs = test_input($_POST['Loisirs']);
-$autreCourantes = test_input($_POST['autreCourantes']);
-
-$depCourantes=[
-    'Alimentation' => $Alimentation, 
-    'Essence'=> $Essence ,
-    'Pharmacie'=> $Pharmacie,
-    'Garderie'=> $Garderie,
-    'Loisirs'=> $Loisirs, 
-    'autreCourantes'=> $autreCourantes
-];
-
-
-$Vetement = test_input($_POST['Vetement']);
-$Cadeaux = test_input($_POST['Cadeaux']);
-$Voiture = test_input($_POST['Voiture']);
-$Vacances = test_input($_POST['Vacances']);
-$Restaurant = test_input($_POST['Restaurant']);
-$Cinema = test_input($_POST['Cinema']);
-$autreOccasionnelles = test_input($_POST['autreOccasionnelles']);
-
-$depFixes=[
-    'Vetement' => $Vetement, 
-    'Cadeaux'=> $Cadeaux ,
-    'Voiture'=> $Voiture,
-    'Vacances'=> $Vacances,
-    'Restaurant'=> $Restaurant, 
-    'Cinema'=> $Cinema,
-    'autreOccasionnelles'=> $autreOccasionnelles
-];
-
-// Connexion à la base de données
-$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
-// Vérification de la connexion
-if ($conn->connect_error) {
-    die("Connexion échouée: " . $conn->connect_error);
-}
-
-
-$_SESSION['login']='marc';
-$user=$_SESSION['login'];
-// Création d'une table pour stocker les données du formulaire
-$sql = "CREATE TABLE IF NOT EXISTS depense_" . $user . "(
-    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    mois varchar (100) NOT NULL,
-    loyer decimal(6,2),
-    dettes decimal(6,2),
-    facture decimal(6,2),
-    abonnement decimal(6,2),
-    assurances decimal(6,2),
-    ecole decimal(6,2),
-    autreFixes decimal(6,2),
-    Alimentation decimal(6,2),
-    Essence decimal(6,2),
-    Pharmacie decimal(6,2),
-    Garderie decimal(6,2),
-    Loisirs decimal(6,2),
-    autreCourantes decimal(6,2),
-    Vetement decimal(6,2),
-    Cadeaux decimal(6,2),
-    Voiture decimal(6,2),
-    Vacances decimal(6,2),
-    Restaurant decimal(6,2),
-    Cinema decimal(6,2),
-    autreOccasionnelles decimal(6,2),
-    reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-)";
-
-if ($conn->query($sql) === TRUE) {
-    echo "Table créée avec succès";
-} else {
-    echo "Erreur de création de table: " . $conn->error;
-}
-
-
-//a modifier, chaque utilisateur à sa table et pour chaque utilisateur on cree une table,
-// il y a une entree par mois à chaque modif de la tableon update le contenue. 
-//à la base toue est zero mais quand on remplie le form une fois les valeurs de base 
-//sont celle dernierement indiqué et chaque modif des valeur = update de la table.
-//. "where depense_" . $user. ".mois =  2035"
-$sqlMonth="select mois from depense_" . $user;
-$resultAll = $conn->query($sqlMonth);
-
-if (mysqli_num_rows($resultAll) > 0) {
-	while($rowData = mysqli_fetch_array($resultAll)){
-  		echo $rowData["mois"].'<br>';
-	}
-}
-
-
-// Insertion des données du formulaire dans la table depenses
-$sql = "INSERT INTO depense_" . $user . " (mois, loyer, dettes, facture, abonnement, assurances, ecole, autreFixes, Alimentation, Essence, Pharmacie, Garderie, Loisirs, autreCourantes, Vetement, Cadeaux, Voiture, Vacances, Restaurant, Cinema, autreOccasionnelles) VALUES ( \"$mois\", $loyer, $dettes, $facture, $abonnement, $assurances, $ecole, $autreFixes, $Alimentation, $Essence, $Pharmacie, $Garderie, $Loisirs, $autreCourantes, $Vetement, $Cadeaux, $Voiture, $Vacances, $Restaurant, $Cinema, $autreOccasionnelles)";
-if (!mysqli_query($conn, $sql)) {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-}
-
-
-// à chaque modif du formulaire, il faut update la table des données, nouvelle entree seulement si c'est pour un nouveau mois.
-// faire un trigger after update, if new month = old month alors data are modified
-
-//afficher les données dans un tableau
-
-
-
-mysqli_close($conn);
-?>
-</body>
+    
+    <!-- Formulaires des dépenses-->
+    <form action="plan.php" method="post">
+      <label for="mois">Pour le mois de</label>
+      <input type="month" name="mois" id="mois" required />
+      <div class="table-depense">
+        <!-- Formulaire des dépenses fixes-->
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">
+                <label for="detail_depense_text">Dépenses Fixes</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><label for="loyer">Loyer</label></th>
+              <td>
+                <input type="number" min="0" max="100000" name="loyer" id="loyer" />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="dettes">Remboursement crédit</label></th>
+              <td>
+                <input type="number" min="0" max="100000" name="dettes" id="dettes" />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="facture">Factures</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="facture"
+                  id="facture"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="abonnement">Abonnements</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="abonnement"
+                  id="abonnement"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="assurances">Assurances</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="assurances"
+                  id="assurances"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="ecole">Education</label></th>
+              <td>
+                <input type="number" min="0" max="100000" name="ecole" id="ecole" />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="autreFixes">Autres Dépenses Fixes</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="autreFixes"
+                  id="autreFixes"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Formulaire des dépenses courantes-->
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">
+                <label for="detail_depense_text">Dépenses Courantes</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><label for="Alimentation">Alimentation</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Alimentation"
+                  id="Alimentation"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Essence">Essence</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Essence"
+                  id="Essence"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Pharmacie">Pharmacie</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Pharmacie"
+                  id="Pharmacie"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Garderie">Garderie</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Garderie"
+                  id="Garderie"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Loisirs">Loisirs</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Loisirs"
+                  id="Loisirs"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label for="autreCourantes">Autres Dépenses Courantes</label>
+              </th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="autreCourantes"
+                  id="autreCourantes"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Formulaire des dépenses occasionnelles-->
+        <table>
+          <thead>
+            <tr>
+              <th colspan="2">
+                <label for="detail_depense_text">Dépenses Occasionnelles</label>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th><label for="Vetement">Vetements</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Vetement"
+                  id="Vetement"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Cadeaux">Cadeaux</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Cadeaux"
+                  id="Cadeaux"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label for="Voiture"
+                  >Entretien et réparation de son véhicule</label
+                >
+              </th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Voiture"
+                  id="Voiture"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Vacances">Vacances</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Vacances"
+                  id="Vacances"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Restaurant">Restaurant</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Restaurant"
+                  id="Restaurant"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th><label for="Cinema">Cinema/Theatre</label></th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="Cinema"
+                  id="Cinema"
+                />
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <label for="autreOccasionnelles"
+                  >Autres Dépenses Occasionnelles</label
+                >
+              </th>
+              <td>
+                <input
+                  type="number"
+                  min="0"
+                  max="100000"
+                  name="autreOccasionnelles"
+                  id="autreOccasionnelles"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div><input type="submit" value="Envoyer" /></div>
+    </form>
+  </body>
 </html>

@@ -1,52 +1,33 @@
-<?php
-//session_start();
-//$_SESSION['login']=$username;
-//$_SESSION['password']=password_hash($password, PASSWORD_DEFAULT);
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./../styles/header.css" rel="stylesheet"/>
+    <title>Sign in</title>
+</head>
+<body>
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'username');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'gestion_argent');
+<header class="HeaderHomepage">
+		<div class="nav_bar">
+			<?php include './../scr/menu.php';?>
+		</div>
+		<div class="middle_header">
+			<div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
+			<h1 class="main_title">The worrisome optimist</h1>
+		</div>
+        <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" > </a></div>
+</header>
 
-// check if form is submitted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+<form method="post" action="login.php">
+    <label for="username">Username:</label>
+    <input type="text" name="username" id="username">
 
-    // get username and password from the form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+    <label for="password">Password:</label>
+    <input type="password" name="password" id="password">
 
-    // check if both fields are not empty
-    if (!empty($username) && !empty($password)) {
+    <input type="submit" value="Log in">
+</form>
 
-        // connect to the database
-        $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-        
-        if (!$conn) {
-          die("Connection failed: " . mysqli_connect_error());
-        }
-
-        // query the database to find a matching username and password  ;
-        $query = "SELECT * FROM profil WHERE username='$username' AND password='password_hash($password, PASSWORD_DEFAULT)'";
-        $result = mysqli_query($conn, $query);
-
-        if (mysqli_num_rows($result) == 1) {
-            // user found, store user information in session or cookie to keep them logged in
-            session_start();
-            $_SESSION['username'] = $username;
-
-            // redirect to the main page
-            header("Location: main.php");
-            exit();
-        } else {
-            // no match found, display an error message
-            echo "Invalid username or password.";
-        }
-
-        mysqli_close($conn);
-
-    } else {
-        // fields are empty, display an error message
-        echo "Please enter a username and password.";
-    }
-}
-?>
+</body>
+</html>

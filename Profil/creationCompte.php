@@ -1,86 +1,129 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Creation de compte</title>
-</head>
-<body>
-<?php
+  <head>
+    <meta charset="utf-8" />
+    <link href="./../styles/creationCompte.css" rel="stylesheet" />
+    <link href="./../styles/header.css" rel="stylesheet"/>
+    <title>Sign up - The worrisome optimist</title>
+  </head>
 
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'gestion_argent');
+  <body>
+    <header class="HeaderHomepage">
+		  <div class="nav_bar">
+			  <?php include './../scr/menu.php';?>
+		  </div>
+		  <div class="middle_header">
+			  <div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
+			  <h1 class="main_title">The worrisome optimist</h1>
+		  </div>
+      <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" > </a></div>
+    </header>
 
-$conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
-//echo "Connected successfully";
+    <div>
+      <h2>Configuration utilisateur</h2>
+    </div>
+    <form action="creationCompte.php" method="post">
+      <table>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <th><label for="userpic" class="labels">Ajouter une photo de profil</label></th>
+            <td>
+              <input
+                type="file"
+                name="userpic"
+                id="userpic"
+                accept=".png,.jpeg"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th><label for="Lastname" class="labels">Nom</label></th>
+            <td>
+              <input
+                type="text"
+                name="Lastname"
+                class="form-control"
+                placeholder="Nom de famille"
+                value=""
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <th><label for="Firstname" class="labels">Prénom</label></th>
+            <td>
+              <input
+                type="text"
+                name="Firstname"
+                class="form-control"
+                value=""
+                placeholder="Prenom"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <th><label for="Username" class="labels">Nom d'utilisateur</label></th>
+            <td>
+              <input
+                type="text"
+                name="Username"
+                class="form-control"
+                value=""
+                placeholder="Nom d'utilisateur"
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <th><label for="passwords">Mot de passe (doit contenir entre 8 et 16 caractères dont au moins un chiffre et une lettre majuscule et minuscule)</label></th>
+            <td>
+                <input type="password" name="passwords" id="passwords" minlength="8" maxlength="16" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="passwords_verif">Mot de passe (doit contenir entre 8 et 16 caractères dont au moins un chiffre et une lettre majuscule et minuscule)</label></th>
+            <td>
+                <input type="password" name="passwords_verif" id="passwords_verif" minlength="8" maxlength="16" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" required>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="Ville" class="labels">Ville</label></th>
+            <td>
+              <input
+                type="text"
+                name="Ville"
+                class="form-control"
+                placeholder="Paris"
+                value=""
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <th><label for="Email" class="labels">Adresse E-mail</label></th>
+            <td>
+              <input
+                type="text"
+                name="Email"
+                class="form-control"
+                placeholder="abc59.@xxx.com"
+                value=""
+                required
+              />
+            </td>
+          </tr>
+          <tr>
+            <th><label for="envoi">Validation</label></th>
+            <td><input type="submit" value="Envoyer" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
 
-// Les données du formulaire
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-} 
 
-// define variables and set to empty values
-/*$userpic = */$Lastname = $Firstname = $Username = $Ville = $Email = $passwords = $passwords_verif = "";
 
-$sql = "CREATE TABLE IF NOT EXISTS profil (
-  id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  Lastname VARCHAR (100),
-  Firstname VARCHAR (100),
-  Username VARCHAR (100),
-  Ville VARCHAR (100),
-  Email VARCHAR (100),
-  passwords VARCHAR (100),
-)";
-
-if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST')) {
-  //$userpic = test_input($_POST["userpic"]);
-  $Lastname = test_input($_POST["Lastname"]);
-  $Ville = test_input($_POST["Ville"]);
-  $Username = test_input($_POST["Username"]);
-  $Firstname = test_input($_POST["Firstname"]);
-  $Email = test_input($_POST["Email"]);
-  $passwords = test_input($_POST["passwords"]);
-  $passwords_verif = test_input($_POST["passwords_verif"]);
-
-  // Check if the passwords match
-  if ($passwords != $passwords_verif) {
-    echo "Passwords do not match.";
-    exit();
-  }
-
-  // Hash the password
-  $passwords = password_hash($passwords, PASSWORD_DEFAULT);
-
-  $_SESSION['login']=$Username;
-  $_SESSION['password']=$passwords;
-
-  $sql= "CREATE TABLE if not exists profil (`Lastname` VARCHAR(100) NOT NULL, `Firstname` VARCHAR(100) NOT NULL, `Username` VARCHAR(100) NOT NULL, `Ville` VARCHAR(100) NOT NULL, `Email` VARCHAR(100) NOT NULL, `passwords` VARCHAR(100) NOT NULL,  `idProfil` INT NOT NULL AUTO_INCREMENT , PRIMARY KEY (`idProfil`)) ENGINE = InnoDB;";
-  mysqli_query($conn, $sql);
-
-	// Insert the user's information into the database
-	$sql = "INSERT INTO profil (Lastname, Firstname, Username, Ville, Email, passwords) VALUES (\"$Lastname\" , \"$Firstname\" , \"$Username\" , \"$Ville\" , \"$Email\" , \"$passwords\" );";
-
-	if (mysqli_query($conn, $sql)) {
-		echo "User registered successfully.";
-	} else {
-		echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-	}
-
-}
-
-mysqli_close($conn);
-?>
-</body>
+  </body>
 </html>

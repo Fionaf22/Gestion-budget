@@ -34,60 +34,13 @@ width: 10%;
     .articleHomepage {background-color: whitesmoke;border : none lightblue 8px;margin: 3%;padding: 1%;overflow: hidden;} 
   aside { background-color: whitesmoke;border: inset 8px lightblue;padding: 1%;}
   }
-header
-{
-    background-color: #F74;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    position: relative;
-    top: 0px; right : 0px;
 
-}
 footer
 {
     background-color: white;
     width: 100%;
     position:fixed;
     bottom: 0mm;
-}
-.nav_bar
-{
-    background-color: white;
-    display: flex;
-    flex-direction: column;
-    border: solid 5px #e74;
-    position: relative;
-    top: 0px; right: 0 px;
-    padding: 5px;
-}
-.nav_bar a:hover
-{
-    background-color: #FA9;
-}
-.search_bar
-{
-    position: absolute;
-    bottom: 0px;
-    right: 50%;
-    transform: translate(50%, 0);
-    
-}
-.picture_logo
-{
-    width: 100px;
-    height: 100%;
-    position: absolute;
-    top: 0px; right : 0px;
-    border: none;
-}
-.main_title
-{
-   position: relative;
 }
 
 thead{
