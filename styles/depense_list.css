@@ -1,0 +1,34 @@
+.depense_list{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-evenly;
+
+}
+
+.depense_list a{
+    color: inherit;
+    text-decoration : inherit;
+}
+
+.depense_item{
+    padding: 3px;
+    margin: 5px;
+}
+
+.red-border {
+    border: solid rgba(230, 0, 0, 0.650) 5px;
+}
+.blue-border {
+    border: solid rgba(0, 0, 230, 0.700) 5px;
+}
+.green-border {
+    border: solid rgba(0, 230, 0, 0.650) 5px;
+}
+.violet-border {
+    border: solid rgba(150, 0, 230, 0.65) 5px;
+}
+.orange-border {
+    border: solid rgba(255, 130, 41, 0.65) 5px;
+}

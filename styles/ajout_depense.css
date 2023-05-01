@@ -82,6 +82,15 @@ legend {
 
 }
 
+.list_depense a{
+    
+    background-color: rgba(127, 59, 34, 0.745);
+    box-shadow: 6px 6px 2px 1px rgba(0, 0, 255, .2);
+    margin: auto;
+    padding: 3px 6px;
+    font: italic 1.5em "Fira Sans", serif;
+}
+
 body{
     background: #fce5dc;
     background: -moz-radial-gradient(top,   #ffccb8 100%, #ffded1 50%, #fce5dc 0%);

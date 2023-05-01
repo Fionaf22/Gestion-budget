@@ -23,7 +23,7 @@
 	<section class="ArticleMainpage">
 		<h2>Ajouter une dépense</h2>
 		<article class="articleHomepage" >
-			<div><a href="./../Depenses/detail_depense.php"> <img src="./../Depenses/notebook.png" alt="Cahier_depense" class="pictureArticle"> </a></div>
+			<div><a href="./../Depenses/ajout_depense.php"> <img src="./../Depenses/notebook.png" alt="Cahier_depense" class="pictureArticle"> </a></div>
 		</article>
 
 

@@ -81,7 +81,7 @@ if ($conn->connect_error) {
 }
 
 
-$_SESSION['login']='marc';
+$_SESSION['login']='shin';
 $user=$_SESSION['login'];
 // Création d'une table pour stocker les données du formulaire
 $sql = "CREATE TABLE IF NOT EXISTS depense_" . $user . "(

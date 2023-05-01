@@ -3,21 +3,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Calendar.css">
+    <link rel="stylesheet" href="./../styles/Calendar.css">
+    <link rel="stylesheet" href="./../styles/header.css">
     <title>Document</title>
 </head>
-<header class=HeaderHomepage>
-    <div class="nav_bar">
-        <a id="TVshows" href="./../Profil/profil.html">Profil</a>
-        <a href="./../Depenses/detail_depense.html" >Budget mensuel</a>
-        <a href="./../Planificateur/plan.html" >Planificateur de budget</a>
-        <a href="./../Achievements/Succes.html" >Achievements</a>
-    </div>	
-    <h1 class="main_title">The worrisome optimist</h1>
-    <div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
-    <div><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" class="picture_logo"> </a></div>
-</header>
 <body>
+<header class=HeaderHomepage>
+		<div class="nav_bar">
+			<?php include './../scr/menu.php';?>
+		</div>
+	<div class="middle_header">
+		<div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
+		<h1 class="main_title">The worrisome optimist</h1>
+	</div>
+    <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" > </a></div>
+</header>
+
     <h1>Calendrier du mois</h1>
 
     <div class="container py-7">
