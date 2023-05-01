@@ -40,13 +40,13 @@
             <tr>
               <th><label for="loyer">Loyer</label></th>
               <td>
-                <input type="number" min="0" max="100000" name="loyer" id="loyer" />
+                <input type="number" min="0" max="100000" name="loyer" id="loyer" value="0"/>
               </td>
             </tr>
             <tr>
               <th><label for="dettes">Remboursement crédit</label></th>
               <td>
-                <input type="number" min="0" max="100000" name="dettes" id="dettes" />
+                <input type="number" min="0" max="100000" name="dettes" id="dettes" value="0"/>
               </td>
             </tr>
             <tr>
@@ -58,6 +58,7 @@
                   max="100000"
                   name="facture"
                   id="facture"
+                  value="0"
                 />
               </td>
             </tr>
@@ -70,6 +71,7 @@
                   max="100000"
                   name="abonnement"
                   id="abonnement"
+                  value="0"
                 />
               </td>
             </tr>
@@ -82,13 +84,14 @@
                   max="100000"
                   name="assurances"
                   id="assurances"
+                  value="0"
                 />
               </td>
             </tr>
             <tr>
               <th><label for="ecole">Education</label></th>
               <td>
-                <input type="number" min="0" max="100000" name="ecole" id="ecole" />
+                <input type="number" min="0" max="100000" name="ecole" id="ecole" value="0"/>
               </td>
             </tr>
             <tr>
@@ -100,6 +103,7 @@
                   max="100000"
                   name="autreFixes"
                   id="autreFixes"
+                  value="0"
                 />
               </td>
             </tr>
@@ -124,6 +128,7 @@
                   max="100000"
                   name="Alimentation"
                   id="Alimentation"
+                  value="0"
                 />
               </td>
             </tr>
@@ -136,6 +141,7 @@
                   max="100000"
                   name="Essence"
                   id="Essence"
+                  value="0"
                 />
               </td>
             </tr>
@@ -148,6 +154,7 @@
                   max="100000"
                   name="Pharmacie"
                   id="Pharmacie"
+                  value="0"
                 />
               </td>
             </tr>
@@ -160,6 +167,7 @@
                   max="100000"
                   name="Garderie"
                   id="Garderie"
+                  value="0"
                 />
               </td>
             </tr>
@@ -172,6 +180,7 @@
                   max="100000"
                   name="Loisirs"
                   id="Loisirs"
+                  value="0"
                 />
               </td>
             </tr>
@@ -186,6 +195,7 @@
                   max="100000"
                   name="autreCourantes"
                   id="autreCourantes"
+                  value="0"
                 />
               </td>
             </tr>
@@ -210,6 +220,7 @@
                   max="100000"
                   name="Vetement"
                   id="Vetement"
+                  value="0"
                 />
               </td>
             </tr>
@@ -222,6 +233,7 @@
                   max="100000"
                   name="Cadeaux"
                   id="Cadeaux"
+                  value="0"
                 />
               </td>
             </tr>
@@ -238,6 +250,7 @@
                   max="100000"
                   name="Voiture"
                   id="Voiture"
+                  value="0"
                 />
               </td>
             </tr>
@@ -250,6 +263,7 @@
                   max="100000"
                   name="Vacances"
                   id="Vacances"
+                  value="0"
                 />
               </td>
             </tr>
@@ -262,6 +276,7 @@
                   max="100000"
                   name="Restaurant"
                   id="Restaurant"
+                  value="0"
                 />
               </td>
             </tr>
@@ -274,6 +289,7 @@
                   max="100000"
                   name="Cinema"
                   id="Cinema"
+                  value="0"
                 />
               </td>
             </tr>
@@ -290,6 +306,7 @@
                   max="100000"
                   name="autreOccasionnelles"
                   id="autreOccasionnelles"
+                  value="0"
                 />
               </td>
             </tr>

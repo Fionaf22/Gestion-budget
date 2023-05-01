@@ -63,7 +63,7 @@ $Username='shin';
 
 <table>
     <thead>
-        resultat des requetes sur plan.html avec php
+        Details des depenses mensuelles
     </thead>
     <tbody>
         <tr>
@@ -82,7 +82,7 @@ $Username='shin';
         </td>
         </tr>
         <tr>
-            <th>Depenses fixes</th>
+            <th>Depenses Fixes</th>
         <td>
             <?php
 $sql="select distinct type_depense as fixe from $Username;";

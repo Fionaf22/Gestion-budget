@@ -1,6 +1,6 @@
 <html lang="en">
 <head>
-    <script>
+<!--     <script>
 		window.addEventListener("load", function() {
 			//récupération de l'élément select
 			var select = document.getElementById("Type-depense-select");
@@ -14,7 +14,7 @@
 				select.setAttribute("data-optgroup", optgroup.label);
 			});
 		});
-	</script>
+	</script> -->
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

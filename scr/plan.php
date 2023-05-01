@@ -84,7 +84,7 @@ if ($conn->connect_error) {
 $_SESSION['login']='shin';
 $user=$_SESSION['login'];
 // Création d'une table pour stocker les données du formulaire
-$sql = "CREATE TABLE IF NOT EXISTS depense_" . $user . "(
+$sql = "CREATE TABLE IF NOT EXISTS budget_" . $user . "(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     mois varchar (100) NOT NULL,
     loyer decimal(6,2),
@@ -133,9 +133,9 @@ if (mysqli_num_rows($resultAll) > 0) {
 
 
 // Insertion des données du formulaire dans la table depenses
-$sql = "INSERT INTO depense_" . $user . " (mois, loyer, dettes, facture, abonnement, assurances, ecole, autreFixes, Alimentation, Essence, Pharmacie, Garderie, Loisirs, autreCourantes, Vetement, Cadeaux, Voiture, Vacances, Restaurant, Cinema, autreOccasionnelles) VALUES ( \"$mois\", $loyer, $dettes, $facture, $abonnement, $assurances, $ecole, $autreFixes, $Alimentation, $Essence, $Pharmacie, $Garderie, $Loisirs, $autreCourantes, $Vetement, $Cadeaux, $Voiture, $Vacances, $Restaurant, $Cinema, $autreOccasionnelles)";
+$sql = "INSERT INTO `gestion_argent`.budget_$user (mois, loyer, dettes, facture, abonnement, assurances, ecole, autreFixes, Alimentation, Essence, Pharmacie, Garderie, Loisirs, autreCourantes, Vetement, Cadeaux, Voiture, Vacances, Restaurant, Cinema, autreOccasionnelles) VALUES ($mois,$loyer,$dettes,$facture, $abonnement, $assurances, $ecole, $autreFixes, $Alimentation, $Essence, $Pharmacie, $Garderie, $Loisirs, $autreCourantes, $Vetement, $Cadeaux, $Voiture, $Vacances, $Restaurant, $Cinema, $autreOccasionnelles)";
 if (!mysqli_query($conn, $sql)) {
-  echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+  echo "Error: " . $sql . "<br><br>" . mysqli_error($conn);
 }
 
 
