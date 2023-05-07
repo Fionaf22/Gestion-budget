@@ -313,7 +313,7 @@
           </tbody>
         </table>
       </div>
-      <div><input type="submit" value="Envoyer" /></div>
+      <div><input type="submit" value="Envoyer" name="bouton_budget_mois"/></div>
     </form>
   </body>
 </html>

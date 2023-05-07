@@ -57,10 +57,32 @@ $Username='shin';
 "Cinema" =>  $sql="SELECT montant from $Username where type_depense = Cinema",
 "autreOccasionnelles" =>  $sql="SELECT montant from $Username where type_depense = autreOccasionnelles"]; ?>
 
+
+<form action="prevision.php" method="GET">
+    <label for="month_budget">Saisir mois pour budget</label>
+    <input type="month" name="month_budget" id="month_budget">
+    <button type="submit">
+        Envoyer
+    </button>
+</form>
+
 <?php 
+function test_input($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'GET')) {
+    $mois = test_input($_GET['month_budget']);
+    $mois = $mois . '-01';
+    echo $mois;
+}
+    
 //ajouter condition sur mois dans where pour que qu'on ait le total par date (mois)
 ?>
-
 <table>
     <thead>
         Details des depenses mensuelles
@@ -70,14 +92,16 @@ $Username='shin';
             <th>Depenses totales</th>
         <td>
             <?php
-        $sql = "select SUM(montant_depense_number) as montant_total from $Username  ;";
+         $sql = "select SUM(montant_depense_number) as montant_total from $Username where date_depense between '$mois' AND '$mois'+INTERVAL 1 MONTH;";
+
         $result = mysqli_query($conn, $sql);
-        if(mysqli_num_rows($result) > 0){
-            $row = mysqli_fetch_assoc($result);
-            echo $row['montant_total'];
-        } else {
+        $row = mysqli_fetch_assoc($result);
+        if ($row['montant_total'] == null){
             echo "0";
+        }else{
+            echo $row['montant_total'];
         }
+        
             ?>
         </td>
         </tr>
@@ -85,7 +109,7 @@ $Username='shin';
             <th>Depenses Fixes</th>
         <td>
             <?php
-$sql="select distinct type_depense as fixe from $Username;";
+$sql="select distinct type_depense as fixe from $Username where date_depense between '$mois' AND '$mois'+INTERVAL 1 MONTH;";
 $result = mysqli_query($conn, $sql);
 $sum=0.0;
 $decompte = mysqli_num_rows($result);
@@ -109,7 +133,7 @@ echo $sum;
             <th>Depenses Courantes</th>
         <td>
             <?php
-            $sql="select distinct type_depense as courant from $Username;";
+            $sql="select distinct type_depense as courant from $Username where date_depense between '$mois' AND '$mois'+INTERVAL 1 MONTH;";
             $result = mysqli_query($conn, $sql);
             $sum=0.0;
             $decompte = mysqli_num_rows($result);
@@ -133,7 +157,7 @@ echo $sum;
             <th>Depenses Occasionnelles</th>
         <td>
             <?php
-            $sql="select distinct type_depense as occasionnel from $Username;";
+            $sql="select distinct type_depense as occasionnel from $Username where date_depense between '$mois' AND '$mois'+INTERVAL 1 MONTH;";
             $result = mysqli_query($conn, $sql);
             $sum=0.0;
             $decompte = mysqli_num_rows($result);
