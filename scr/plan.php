@@ -120,6 +120,10 @@ if (!mysqli_query($conn, $sql)) {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
+//$sql = "SELECT GROUP_CONCAT(CONCAT(\'`\', COLUMN_NAME, \'`\')) INTO @cols\n"
+//  . "FROM information_schema.columns\n"
+//. "WHERE table_name = \'gestion_argent.budget_marc\' AND COLUMN_NAME LIKE \'%_list\';\n"
+//.SET @query = CONCAT(\'SELECT \', @cols, \' FROM gestion_argent.budget_marc\');PREPARE stmt FROM @query;EXECUTE stmt;DEALLOCATE PREPARE stmt;"
 
 
 // Insertion des données du formulaire dans la table depenses
@@ -141,7 +145,8 @@ if (!mysqli_query($conn, $sql)) {
     if (!mysqli_query($conn, $sql)) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
-    //header('Location: ./../Planificateur/plan.php');
+    header('Location: ./../Planificateur/plan.php');
+
 
 
 // à chaque modif du formulaire, il faut update la table des données, nouvelle entree seulement si c'est pour un nouveau mois.

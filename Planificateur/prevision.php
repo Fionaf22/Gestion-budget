@@ -34,28 +34,28 @@ $Username='shin';
 
 
 <?php $depense_fixes = ["Loyer" =>  $sql="SELECT montant from $Username where type_depense = loyer",
-"Dettes" =>  $sql="SELECT montant from $Username where type_depense = dettes",
-"Facture" =>  $sql="SELECT montant from $Username where type_depense = facture",
-"Abonnement" =>  $sql="SELECT montant from $Username where type_depense = abonnement",
-"Assurances" =>  $sql="SELECT montant from $Username where type_depense = assurances",
-"Ecole" =>  $sql="SELECT montant from $Username where type_depense = ecole",
-"autreFixes" =>  $sql="SELECT montant from $Username where type_depense = autreFixes"]; ?>
+"Dettes" =>  $sql="SELECT montant from $Username where type_depense = dettes_fixes",
+"Facture" =>  $sql="SELECT montant from $Username where type_depense = facture_fixes",
+"Abonnement" =>  $sql="SELECT montant from $Username where type_depense = abonnement_fixes",
+"Assurances" =>  $sql="SELECT montant from $Username where type_depense = assurances_fixes",
+"Ecole" =>  $sql="SELECT montant from $Username where type_depense = ecole_fixes",
+"autreFixes" =>  $sql="SELECT montant from $Username where type_depense = autreFixes_fixes"]; ?>
 
-<?php $depense_Courante = ["Alimentation" =>  $sql="SELECT montant from $Username where type_depense = Alimentation",
-"Essence" =>  $sql="SELECT montant from $Username where type_depense = Essence",
-"Pharmacie" =>  $sql="SELECT montant from $Username where type_depense = Pharmacie",
-"Garderie" =>  $sql="SELECT montant from $Username where type_depense = Garderie",
-"Loisirs" =>  $sql="SELECT montant from $Username where type_depense = Loisirs",
-"autreCourantes" =>  $sql="SELECT montant from $Username where type_depense = autreCourantes"]; ?>
+<?php $depense_Courante = ["Alimentation" =>  $sql="SELECT montant from $Username where type_depense = Alimentation_fixes",
+"Essence" =>  $sql="SELECT montant from $Username where type_depense = Essence_fixes",
+"Pharmacie" =>  $sql="SELECT montant from $Username where type_depense = Pharmacie_fixes",
+"Garderie" =>  $sql="SELECT montant from $Username where type_depense = Garderie_fixes",
+"Loisirs" =>  $sql="SELECT montant from $Username where type_depense = Loisirs_fixes",
+"autreCourantes" =>  $sql="SELECT montant from $Username where type_depense = autreCourantes_fixes"]; ?>
 
 
-<?php $depense_Occasionnelles = ["Vetement" =>  $sql="SELECT montant from $Username where type_depense = Vetement" ,
-"Cadeaux" =>  $sql="SELECT montant from $Username where type_depense = Cadeaux",
-"Voiture" =>  $sql="SELECT montant from $Username where type_depense = Voiture",
-"Vacances" =>  $sql="SELECT montant from $Username where type_depense = Vacances",
-"Restaurant" =>  $sql="SELECT montant from $Username where type_depense = Restaurant",
-"Cinema" =>  $sql="SELECT montant from $Username where type_depense = Cinema",
-"autreOccasionnelles" =>  $sql="SELECT montant from $Username where type_depense = autreOccasionnelles"]; ?>
+<?php $depense_Occasionnelles = ["Vetement" =>  $sql="SELECT montant from $Username where type_depense = Vetement_fixes" ,
+"Cadeaux" =>  $sql="SELECT montant from $Username where type_depense = Cadeaux_fixes",
+"Voiture" =>  $sql="SELECT montant from $Username where type_depense = Voiture_fixes",
+"Vacances" =>  $sql="SELECT montant from $Username where type_depense = Vacances_fixes",
+"Restaurant" =>  $sql="SELECT montant from $Username where type_depense = Restaurant_fixes",
+"Cinema" =>  $sql="SELECT montant from $Username where type_depense = Cinema_fixes",
+"autreOccasionnelles" =>  $sql="SELECT montant from $Username where type_depense = autreOccasionnelles_fixes"]; ?>
 
 
 <form action="prevision.php" method="GET">
@@ -75,7 +75,7 @@ function test_input($data)
     return $data;
 }
 
-if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'GET')) {
+if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'GET') && isset($_GET['month_budget'])) {
     $mois = test_input($_GET['month_budget']);
     $mois = $mois . '-01';
     echo $mois;
@@ -92,6 +92,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'GET')) 
             <th>Depenses totales</th>
         <td>
             <?php
+            if (!isset($mois)){$mois="";};
          $sql = "select SUM(montant_depense_number) as montant_total from $Username where date_depense between '$mois' AND '$mois'+INTERVAL 1 MONTH;";
 
         $result = mysqli_query($conn, $sql);
