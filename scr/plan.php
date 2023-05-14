@@ -7,7 +7,8 @@ define('DB_USERNAME', 'root');
 define('DB_PASSWORD', '');
 define('DB_NAME', 'gestion_argent');
 $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
-
+$login= 'yeonwoo';
+$_SESSION['login']=  $login;
 // Les données du formulaire
 
 function test_input($data)
@@ -23,60 +24,30 @@ function test_input($data)
 //if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST') && isset($_POST["bouton_budget_mois"])) {
 $mois = test_input($_POST['mois']);
 $loyer = test_input($_POST['loyer']);
-$dettes = test_input($_POST['dettes']);
+$dette = test_input($_POST['dette']);
 $facture = test_input($_POST['facture']);
 $abonnement = test_input($_POST['abonnement']);
-$assurances = test_input($_POST['assurances']);
+$assurance = test_input($_POST['assurance']);
 $ecole = test_input($_POST['ecole']);
-$autreFixes = test_input($_POST['autreFixes']);
+$autreFixe = test_input($_POST['autreFixe']);
 
-$Alimentation = test_input($_POST['Alimentation']);
-$Essence = test_input($_POST['Essence']);
-$Pharmacie = test_input($_POST['Pharmacie']);
-$Garderie = test_input($_POST['Garderie']);
-$Loisirs = test_input($_POST['Loisirs']);
-$autreCourantes = test_input($_POST['autreCourantes']);
+$alimentation = test_input($_POST['alimentation']);
+$essence = test_input($_POST['essence']);
+$pharmacie = test_input($_POST['pharmacie']);
+$garderie = test_input($_POST['garderie']);
+$loisir = test_input($_POST['loisir']);
+$autreCourante = test_input($_POST['autreCourante']);
 
 
-$Vetement = test_input($_POST['Vetement']);
-$Cadeaux = test_input($_POST['Cadeaux']);
-$Voiture = test_input($_POST['Voiture']);
-$Vacances = test_input($_POST['Vacances']);
-$Restaurant = test_input($_POST['Restaurant']);
-$Cinema = test_input($_POST['Cinema']);
-$autreOccasionnelles = test_input($_POST['autreOccasionnelles']);
+$vetement = test_input($_POST['vetement']);
+$cadeau = test_input($_POST['cadeau']);
+$voiture = test_input($_POST['voiture']);
+$vacances = test_input($_POST['vacances']);
+$restaurant = test_input($_POST['restaurant']);
+$cinema = test_input($_POST['cinema']);
+$autreOccasionnelle = test_input($_POST['autreOccasionnelle']);
 
 //}
-
-$depFixes = [
-    'mois' => $mois,
-    'loyer' => $loyer,
-    'dettes' => $dettes,
-    'facture' => $facture,
-    'abonnement' => $abonnement,
-    'assurances' => $assurances,
-    'ecole' => $ecole,
-    'autreFixes' => $autreFixes
-];
-
-$depCourantes = [
-    'Alimentation' => $Alimentation,
-    'Essence' => $Essence,
-    'Pharmacie' => $Pharmacie,
-    'Garderie' => $Garderie,
-    'Loisirs' => $Loisirs,
-    'autreCourantes' => $autreCourantes
-];
-
-$depOccasionnelles = [
-    'Vetement' => $Vetement,
-    'Cadeaux' => $Cadeaux,
-    'Voiture' => $Voiture,
-    'Vacances' => $Vacances,
-    'Restaurant' => $Restaurant,
-    'Cinema' => $Cinema,
-    'autreOccasionnelles' => $autreOccasionnelles
-];
 
 // Connexion à la base de données
 $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -87,32 +58,30 @@ if ($conn->connect_error) {
 }
 
 
-//$_SESSION['login'] = 'shins';
-//$user = $_SESSION['login'];
 // Création d'une table pour stocker les données du formulaire
-$sql = "CREATE TABLE IF NOT EXISTS budget_marc(
+$sql = "CREATE TABLE IF NOT EXISTS budget_" . $login . " (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     mois varchar (100) NOT NULL,
     loyer decimal(6,2),
-    dettes decimal(6,2),
+    dette decimal(6,2),
     facture decimal(6,2),
     abonnement decimal(6,2),
-    assurances decimal(6,2),
+    assurance decimal(6,2),
     ecole decimal(6,2),
-    autreFixes decimal(6,2),
-    Alimentation decimal(6,2),
-    Essence decimal(6,2),
-    Pharmacie decimal(6,2),
-    Garderie decimal(6,2),
-    Loisirs decimal(6,2),
-    autreCourantes decimal(6,2),
-    Vetement decimal(6,2),
-    Cadeaux decimal(6,2),
-    Voiture decimal(6,2),
-    Vacances decimal(6,2),
-    Restaurant decimal(6,2),
-    Cinema decimal(6,2),
-    autreOccasionnelles decimal(6,2),
+    autreFixe decimal(6,2),
+    alimentation decimal(6,2),
+    essence decimal(6,2),
+    pharmacie decimal(6,2),
+    garderie decimal(6,2),
+    loisir decimal(6,2),
+    autreCourante decimal(6,2),
+    vetement decimal(6,2),
+    cadeau decimal(6,2),
+    voiture decimal(6,2),
+    vacances decimal(6,2),
+    restaurant decimal(6,2),
+    cinema decimal(6,2),
+    autreOccasionnelle decimal(6,2),
     reg_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 )";
 
@@ -122,22 +91,22 @@ if (!mysqli_query($conn, $sql)) {
 
 //$sql = "SELECT GROUP_CONCAT(CONCAT(\'`\', COLUMN_NAME, \'`\')) INTO @cols\n"
 //  . "FROM information_schema.columns\n"
-//. "WHERE table_name = \'gestion_argent.budget_marc\' AND COLUMN_NAME LIKE \'%_list\';\n"
-//.SET @query = CONCAT(\'SELECT \', @cols, \' FROM gestion_argent.budget_marc\');PREPARE stmt FROM @query;EXECUTE stmt;DEALLOCATE PREPARE stmt;"
+//. "WHERE table_name = \'gestion_argent.budget_" . $login . "\' AND COLUMN_NAME LIKE \'%_list\';\n"
+//.SET @query = CONCAT(\'SELECT \', @cols, \' FROM gestion_argent.budget_" . $login . "\');PREPARE stmt FROM @query;EXECUTE stmt;DEALLOCATE PREPARE stmt;"
 
 
 // Insertion des données du formulaire dans la table depenses
-    $sqlMonth = "select mois from budget_marc where mois = '$mois'";
+    $sqlMonth = "select mois from budget_" . $login . " where mois = '$mois'";
     $resultAll = $conn->query($sqlMonth);
 
     if (mysqli_num_rows($resultAll) > 0) {
         echo mysqli_num_rows($resultAll);
-        $sql = "UPDATE `budget_marc` SET`mois`='$mois',`loyer`= $loyer,`dettes`=$dettes,`facture`=$facture,`abonnement`=$abonnement,`assurances`=$assurances,`ecole`=$ecole,
-    `autreFixes`=$autreFixes,`Alimentation`=$Alimentation,`Essence`=$Essence,`Pharmacie`=$Pharmacie,`Garderie`=$Garderie,`Loisirs`=$Loisirs,
-    `autreCourantes`=$autreCourantes,`Vetement`=$Vetement, `Cadeaux`=$Cadeaux,`Voiture`=$Voiture,`Vacances`=$Vacances,
-    `Restaurant`=$Restaurant,`Cinema`= $Cinema,`autreOccasionnelles`= $autreOccasionnelles WHERE mois = '$mois';";
+        $sql = "UPDATE `budget_" . $login . "` SET`mois`='$mois',`loyer`= $loyer,`dette`=$dette,`facture`=$facture,`abonnement`=$abonnement,`assurance`=$assurance,`ecole`=$ecole,
+    `autreFixe`=$autreFixe,`alimentation`=$alimentation,`essence`=$essence,`pharmacie`=$pharmacie,`garderie`=$garderie,`loisir`=$loisir,
+    `autreCourante`=$autreCourante,`vetement`=$vetement, `cadeau`=$cadeau,`voiture`=$voiture,`vacances`=$vacances,
+    `restaurant`=$restaurant,`cinema`= $cinema,`autreOccasionnelle`= $autreOccasionnelle WHERE mois = '$mois';";
     } else {
-        $sql = "INSERT INTO `gestion_argent`.budget_marc (mois, loyer, dettes, facture, abonnement, assurances, ecole, autreFixes, Alimentation, Essence, Pharmacie, Garderie, Loisirs, autreCourantes, Vetement, Cadeaux, Voiture, Vacances, Restaurant, Cinema, autreOccasionnelles) VALUES ('$mois',$loyer,$dettes,$facture, $abonnement, $assurances, $ecole, $autreFixes, $Alimentation, $Essence, $Pharmacie, $Garderie, $Loisirs, $autreCourantes, $Vetement, $Cadeaux, $Voiture, $Vacances, $Restaurant, $Cinema, $autreOccasionnelles)";
+        $sql = "INSERT INTO `gestion_argent`.budget_" . $login . " (mois, loyer, dette, facture, abonnement, assurance, ecole, autreFixe, alimentation, essence, pharmacie, garderie, loisir, autreCourante, vetement, cadeau, voiture, vacances, restaurant, cinema, autreOccasionnelle) VALUES ('$mois',$loyer,$dette,$facture, $abonnement, $assurance, $ecole, $autreFixe, $alimentation, $essence, $pharmacie, $garderie, $loisir, $autreCourante, $vetement, $cadeau, $voiture, $vacances, $restaurant, $cinema, $autreOccasionnelle)";
     }
     
 
@@ -146,14 +115,6 @@ if (!mysqli_query($conn, $sql)) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
     header('Location: ./../Planificateur/plan.php');
-
-
-
-// à chaque modif du formulaire, il faut update la table des données, nouvelle entree seulement si c'est pour un nouveau mois.
-// faire un trigger after update, if new month = old month alors data are modified
-
-//afficher les données dans un tableau
-
 
 
 mysqli_close($conn);

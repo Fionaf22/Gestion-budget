@@ -1,3 +1,7 @@
+<?php
+session_start();
+$login= 'yeonwoo';
+$_SESSION['login']=  $login;?>
 <html lang="en">
 
 <head>

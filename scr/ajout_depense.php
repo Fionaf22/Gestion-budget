@@ -1,6 +1,7 @@
 <?php
 session_start();
-$_SESSION['username'] = 'shin';
+$login= 'yeonwoo';
+$_SESSION['login']=  $login;
 
 ?>
 <html>
@@ -29,7 +30,7 @@ $_SESSION['username'] = 'shin';
   $conn = mysqli_connect("localhost", "root", "", "gestion_argent");
 
   // define variables and set to empty values
-  $Username = $couleur_depense = $detail_depense_text = $date_depense = $type_depense = $note_depense = $montant_depense_number = "";
+ $couleur_depense = $detail_depense_text = $date_depense = $type_depense = $note_depense = $montant_depense_number = "";
 
 
   if (!$conn) {
@@ -51,9 +52,8 @@ $_SESSION['username'] = 'shin';
     $detail_depense_text = test_input($_POST["detail_depense_text"]);
     $note_depense = test_input($_POST["note_depense"]);
   }
-  //$Username = $_SESSION['login'];
-  $Username = 'shin';
-  $sqlCreate = "CREATE TABLE if not exists `gestion_argent`.$Username ( `idDepense` INT NOT NULL AUTO_INCREMENT ,`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `montant_depense_number` DECIMAL(10, 2) NOT NULL , `couleur_depense` VARCHAR(30) NOT NULL , `type_depense` VARCHAR(100) NOT NULL, `note_depense` VARCHAR(250) NOT NULL  ,  PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
+
+  $sqlCreate = "CREATE TABLE if not exists `gestion_argent`.$login ( `idDepense` INT NOT NULL AUTO_INCREMENT ,`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `montant_depense_number` DECIMAL(10, 2) NOT NULL , `couleur_depense` VARCHAR(30) NOT NULL , `type_depense` VARCHAR(100) NOT NULL, `note_depense` VARCHAR(250) NOT NULL  ,  PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
   if (!mysqli_query($conn, $sqlCreate)) {
     echo "Error: " . $sqlCreate . "<br>" . mysqli_error($conn);
     echo "<br>Liste de dépense vide <br>";
@@ -62,7 +62,7 @@ $_SESSION['username'] = 'shin';
   if (isset($_POST['bouton_depense'])) {
     if (!isset($_SESSION['form_submitted'])) {
       if (!empty($montant_depense_number)) {
-        $sql = "INSERT INTO `gestion_argent`.$Username (couleur_depense, detail_depense_text,montant_depense_number, date_depense,type_depense,optgroup_label, note_depense) VALUES (\"$couleur_depense\" , \"$detail_depense_text\" ,\"$montant_depense_number\", \"$date_depense\",   \"$type_depense\", \"$note_depense\" );";
+        $sql = "INSERT INTO `gestion_argent`.$login (couleur_depense, detail_depense_text,montant_depense_number, date_depense,type_depense, note_depense) VALUES (\"$couleur_depense\" , \"$detail_depense_text\" ,\"$montant_depense_number\", \"$date_depense\",   \"$type_depense\", \"$note_depense\" );";
         if (!mysqli_query($conn, $sql)) {
           echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -96,7 +96,7 @@ $_SESSION['username'] = 'shin';
 
 
   <?php
-  $sql = "SELECT * FROM $Username ORDER BY couleur_depense, type_depense";
+  $sql = "SELECT * FROM $login ORDER BY couleur_depense, type_depense";
   $result = mysqli_query($conn, $sql);
   ?>
   <div class="depense_list ">
