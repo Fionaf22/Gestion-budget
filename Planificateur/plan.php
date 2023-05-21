@@ -43,7 +43,10 @@ function gen_table($title,$typeDepense,$login){
   }
 
 ?>
-<table>
+
+
+
+<table class="table table-striped table-inverse table-responsive">
   <thead>
     <tr>
       <th colspan="2">
@@ -58,7 +61,7 @@ function gen_table($title,$typeDepense,$login){
   <?php foreach($typeDepense as $x => $x_value) { ?>
     <tr>
         <th><label for="<?php echo $x;?>"><?php echo $x_value;?></label></th>
-        <td><input type="number" min="0" step="0.01" max="100000" name="<?php echo $x; ?>" id="<?php echo $x; ?>" value="<?php echo (retrieve_budget($x,$login)); ?>"/></td>
+        <td><input class="form-control" type="number" min="0" step="0.01" max="100000" name="<?php echo $x; ?>" id="<?php echo $x; ?>" value="<?php echo (retrieve_budget($x,$login)); ?>"/></td>
         <td <?php if (!isset($mois_budget)) { echo "hidden"; } ?>><?php echo(retrieve_budget($x,$login)-retrieve_sum_spent($x,$login));?></td>
     </tr>
 <?php } ?>
@@ -118,21 +121,20 @@ function retrieve_sum_spent($type,$login){
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="./../styles/plan.css" />
   <link href="./../styles/header.css" rel="stylesheet">
+  <link href="./../styles/footer.css" rel="stylesheet">
+  <link href="./../styles/plan.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <title>Depense</title>
 </head>
 <body>
-  <header class="HeaderHomepage">
-    <div class="nav_bar">
-      <?php include './../scr/menu.php'; ?>
-    </div>
-    <h1 class="main_title">The worrisome optimist</h1>
-    <div class="search_bar">
-      <form><input type="text" placeholder="Search.." /></form>
-    </div>
-    <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site"> </a></div>
-  </header>
+<header class="HeaderHomepage">
+
+<?php include './../scr/menu.php';?>
+  
+</header>
 
   <h1>Planificateur de dépenses</h1>
 
@@ -148,7 +150,6 @@ function retrieve_sum_spent($type,$login){
 
   <?php if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'GET') && isset($_GET['month_budget'])) {
     $mois = test_input($_GET['month_budget']);
-    $now = date('Y-m');
   }?>
 
   <form action="./../scr/plan.php" method="post">
@@ -157,8 +158,6 @@ function retrieve_sum_spent($type,$login){
     <div class="table-depense">
 
  <!-- Formulaire des dépenses fixes-->
- <?php 
- //if (!isset($mois)) { $mois=date('Y-m');}; ?>
    <?php gen_table('Dépenses Fixes',$depFixes,$login);?>
     <!-- Formulaire des dépenses courantes-->
    <?php gen_table('Dépenses Courantes',$depCourantes,$login);?>
@@ -167,6 +166,9 @@ function retrieve_sum_spent($type,$login){
   
     <div><input type="submit" value="Envoyer" name="bouton_budget_mois" /></div>
   </form>
+
+  <!--footer-->
+<?php include './../scr/footer.php'; ?>
 </body>
 
 </html>

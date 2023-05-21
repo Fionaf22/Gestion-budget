@@ -1,7 +1,12 @@
 <?php
 session_start();
-$login= 'yeonwoo';
-$_SESSION['login']=  $login;
+$login = 'yeonwoo';
+$_SESSION['login'] =  $login;
+$conn = mysqli_connect("localhost", "root", "", "gestion_argent");
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+//echo "Connected successfully";
 
 ?>
 <html>
@@ -10,37 +15,53 @@ $_SESSION['login']=  $login;
   <title>Ajout depense</title>
   <link href="./../styles/depense_list.css" rel="stylesheet" />
   <link href="./../styles/header.css" rel="stylesheet" />
+  <link href="./../styles/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
   <header class="HeaderHomepage">
-    <div class="nav_bar">
-      <?php include './../scr/menu.php'; ?>
-    </div>
-    <div class="middle_header">
-      <div class="search_bar">
-        <form><input type="text" placeholder="Search.."></form>
-      </div>
-      <h1 class="main_title">The worrisome optimist</h1>
-    </div>
-    <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site"> </a></div>
+
+    <?php include './../scr/menu.php'; ?>
+
   </header>
+
+
+
+  <br>
+  <div class="container">
+    <div class="btn-group">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Filtrer par couleur
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a href="./../view/details_depenses.php?color-tag=blue">Bleu</a></li>
+        <li><a href="./../view/details_depenses.php?color-tag=orange">Orange</a></li>
+        <li><a href="./../view/details_depenses.php?color-tag=red">Rouge</a></li>
+        <li><a href="./../view/details_depenses.php?color-tag=green">Vert</a></li>
+        <li><a href="./../view/details_depenses.php?color-tag=violet">Violet</a></li>
+      </ul>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Trier les dépenses
+        <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <li><a href="./../view/details_depenses.php?price">Par montant</a></li>
+        <li><a href="./../view/details_depenses.php?date">Par date</a></li>
+        <li><a href="./../view/details_depenses.php?type">Par type</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container p-4">
   <?php
-
-  $conn = mysqli_connect("localhost", "root", "", "gestion_argent");
-
   // define variables and set to empty values
- $couleur_depense = $detail_depense_text = $date_depense = $type_depense = $note_depense = $montant_depense_number = "";
-
-
-  if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-  }
-  //echo "Connected successfully";
-
-  if (isset($_POST['Type-depense-select'])) {
-    $typeDepense = $_POST['Type-depense-select'];
-    echo "Le type de dépense sélectionné est : " . $typeDepense;
+  $couleur_depense = $detail_depense_text = $date_depense = $type_depense = $note_depense = $montant_depense_number = "";
+  $sqlCreate = "CREATE TABLE if not exists `gestion_argent`.$login ( `idDepense` INT NOT NULL AUTO_INCREMENT ,`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `montant_depense_number` DECIMAL(10, 2) NOT NULL , `couleur_depense` VARCHAR(30) NOT NULL , `type_depense` VARCHAR(100) NOT NULL, `note_depense` VARCHAR(250) NOT NULL  ,  PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
+  if (!mysqli_query($conn, $sqlCreate)) {
+    echo "Error: " . $sqlCreate . "<br>" . mysqli_error($conn);
+    echo "<br>Liste de dépense vide <br>";
   }
 
   if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST') && isset($_POST["bouton_depense"])) {
@@ -53,11 +74,7 @@ $_SESSION['login']=  $login;
     $note_depense = test_input($_POST["note_depense"]);
   }
 
-  $sqlCreate = "CREATE TABLE if not exists `gestion_argent`.$login ( `idDepense` INT NOT NULL AUTO_INCREMENT ,`detail_depense_text` VARCHAR(100) NOT NULL , `date_depense` VARCHAR(15) NOT NULL , `montant_depense_number` DECIMAL(10, 2) NOT NULL , `couleur_depense` VARCHAR(30) NOT NULL , `type_depense` VARCHAR(100) NOT NULL, `note_depense` VARCHAR(250) NOT NULL  ,  PRIMARY KEY (`idDepense`)) ENGINE = InnoDB;";
-  if (!mysqli_query($conn, $sqlCreate)) {
-    echo "Error: " . $sqlCreate . "<br>" . mysqli_error($conn);
-    echo "<br>Liste de dépense vide <br>";
-  }
+
 
   if (isset($_POST['bouton_depense'])) {
     if (!isset($_SESSION['form_submitted'])) {
@@ -106,7 +123,7 @@ $_SESSION['login']=  $login;
         $couleur_depense = $row['couleur_depense'];
     ?>
         <form action="./../view/details_depenses.php?idDepense" method="get">
-          <a href="./..//view/details_depenses.php?idDepense=<?php echo $row['idDepense']; ?>">
+          <a href="./../view/details_depenses.php?idDepense=<?php echo $row['idDepense']; ?>">
             <div class="depense_item  <?php echo $row['couleur_depense']; ?>-border">
               <?php
               echo "Date : " . $row["date_depense"] . "<br>";
@@ -116,7 +133,7 @@ $_SESSION['login']=  $login;
               ?>
             </div>
           </a>
-          <input type="hidden" name="idDepense" value="<?php echo $row['idDepense']; ?>">
+          <button name="id_to_delete_depense" value=<?php echo $row['idDepense']; ?>>Supprimer</button>
         </form>
     <?php
       }
@@ -126,7 +143,10 @@ $_SESSION['login']=  $login;
 
     mysqli_close($conn);
     ?>
-
+</div>
+</div>
+<!--footer-->
+<?php include './../scr/footer.php'; ?>
 </body>
 
 </html>

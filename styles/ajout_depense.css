@@ -24,14 +24,6 @@
   }
 
 
-footer
-{
-    background-color: white;
-    width: 100%;
-    position:fixed;
-    bottom: 0mm;
-}
-
 img{
     width: 100%;
 }
@@ -52,33 +44,31 @@ caption {
 }
 
 table{
-    margin: auto;
-    table-layout: fixed;
-    width: 80%;
+    table-layout: auto;
+    width: 99%;
 }
 
 fieldset{
-    padding-top: 30px;
-    padding-bottom: 10px;
     text-align: center; 
-    margin: auto;
-    margin-top: 5%;
-    width: 70%;
-    max-width: 700px;
-    min-height: 300px;
+    width: 50em;
+    max-height: 68%;
     background-color: #fff5f2;
     display: flex;
     justify-content: space-evenly;
     flex-direction : column;
-    height: 40%;
     box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
 }
 
+
 legend {
-    background-color: rgba(127, 59, 34, 0.745);
-    color: #fff;
+    background-color: #bf6657;
     padding: 3px 6px;
     font: italic 1.5em "Fira Sans", serif;
+}
+
+.form_depense{
+    padding: 2%;
+    text-align: center;
 
 }
 

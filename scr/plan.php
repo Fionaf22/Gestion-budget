@@ -20,8 +20,9 @@ function test_input($data)
 }
 
 
+$mois=$loyer=$dette=$facture=$abonnement=$assurance=$ecole=$autreFixe=$alimentation=$essence=$pharmacie=$garderie=$loisir=$autreCourante=$vetement=$cadeau=$voiture=$vacances=$restaurant=$cinema=$autreOccasionnelle=0;
 
-//if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST') && isset($_POST["bouton_budget_mois"])) {
+if(isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'POST') && isset($_POST["bouton_budget_mois"])) {
 $mois = test_input($_POST['mois']);
 $loyer = test_input($_POST['loyer']);
 $dette = test_input($_POST['dette']);
@@ -47,7 +48,7 @@ $restaurant = test_input($_POST['restaurant']);
 $cinema = test_input($_POST['cinema']);
 $autreOccasionnelle = test_input($_POST['autreOccasionnelle']);
 
-//}
+}
 
 // Connexion à la base de données
 $conn = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -119,6 +120,3 @@ if (!mysqli_query($conn, $sql)) {
 
 mysqli_close($conn);
 ?>
-</body>
-
-</html>

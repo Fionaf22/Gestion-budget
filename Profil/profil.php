@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../styles/profil.css">
     <link rel="stylesheet" href="./../styles/header.css">
+    <link href="./../styles/footer.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Profil</title>
 </head>
-<header class="HeaderHomepage">
-		  <div class="nav_bar">
-			  <?php include './../scr/menu.php';?>
-		  </div>
-		  <div class="middle_header">
-			  <div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
-			  <h1 class="main_title">The worrisome optimist</h1>
-		  </div>
-      <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" > </a></div>
-    </header>
+
 <body>
+<header class="HeaderHomepage">
+
+<?php include './../scr/menu.php';?>
+  
+</header>
     <h1>Profil</h1>
     
-    <table>
+    <table class="table">
         <thead></thead>
         <tbody>
           <tr>
@@ -100,6 +100,8 @@
           </tr>
         </tbody>
       </table>
-        
+ 
+      <!--footer-->
+<?php include './../scr/footer.php'; ?>
 </body>
 </html>

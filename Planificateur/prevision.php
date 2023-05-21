@@ -11,52 +11,50 @@ $_SESSION['login']=  $login;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./../styles/plan.css">
     <link href="./../styles/header.css" rel="stylesheet">
+    <link href="./../styles/footer.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Depense</title>
 </head>
 
 <body>
-<header class=HeaderHomepage>
-		<div class="nav_bar">
-			<?php include './../scr/menu.php';?>
-		</div>
-	<div class="middle_header">
-		<div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>			
-        <h1 class="main_title">The worrisome optimist</h1>
-	</div>
-    <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" > </a></div>
+<header class="HeaderHomepage">
+
+<?php include './../scr/menu.php';?>
+  
 </header>
 <?php
 $conn = mysqli_connect("localhost","root","","gestion_argent");
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
 }
-$login='shin';
 ?>
 
 
-<?php $depense_fixes = ["Loyer" =>  $sql="SELECT montant from $login where type_depense = loyer",
-"Dettes" =>  $sql="SELECT montant from $login where type_depense = dettes_fixes",
-"Facture" =>  $sql="SELECT montant from $login where type_depense = facture_fixes",
-"Abonnement" =>  $sql="SELECT montant from $login where type_depense = abonnement_fixes",
-"Assurances" =>  $sql="SELECT montant from $login where type_depense = assurances_fixes",
-"Ecole" =>  $sql="SELECT montant from $login where type_depense = ecole_fixes",
-"autreFixes" =>  $sql="SELECT montant from $login where type_depense = autreFixes_fixes"]; ?>
+<?php $depense_fixes = ["loyer" =>  $sql="SELECT montant from $login where type_depense = loyer",
+"dette" =>  $sql="SELECT montant from $login where type_depense = dette",
+"facture" =>  $sql="SELECT montant from $login where type_depense = facture",
+"abonnement" =>  $sql="SELECT montant from $login where type_depense = abonnement",
+"assurance" =>  $sql="SELECT montant from $login where type_depense = assurance",
+"ecole" =>  $sql="SELECT montant from $login where type_depense = ecole",
+"autreFixe" =>  $sql="SELECT montant from $login where type_depense = autreFixe"]; ?>
 
-<?php $depense_Courante = ["Alimentation" =>  $sql="SELECT montant from $login where type_depense = Alimentation_fixes",
-"Essence" =>  $sql="SELECT montant from $login where type_depense = Essence_fixes",
-"Pharmacie" =>  $sql="SELECT montant from $login where type_depense = Pharmacie_fixes",
-"Garderie" =>  $sql="SELECT montant from $login where type_depense = Garderie_fixes",
-"Loisirs" =>  $sql="SELECT montant from $login where type_depense = Loisirs_fixes",
-"autreCourantes" =>  $sql="SELECT montant from $login where type_depense = autreCourantes_fixes"]; ?>
+<?php $depense_Courante = ["alimentation" =>  $sql="SELECT montant from $login where type_depense = alimentation",
+"essence" =>  $sql="SELECT montant from $login where type_depense = essence",
+"pharmacie" =>  $sql="SELECT montant from $login where type_depense = pharmacie",
+"garderie" =>  $sql="SELECT montant from $login where type_depense = garderie",
+"loisir" =>  $sql="SELECT montant from $login where type_depense = loisir",
+"autreCourante" =>  $sql="SELECT montant from $login where type_depense = autreCourante"]; ?>
 
 
-<?php $depense_Occasionnelles = ["Vetement" =>  $sql="SELECT montant from $login where type_depense = Vetement_fixes" ,
-"Cadeaux" =>  $sql="SELECT montant from $login where type_depense = Cadeaux_fixes",
-"Voiture" =>  $sql="SELECT montant from $login where type_depense = Voiture_fixes",
-"Vacances" =>  $sql="SELECT montant from $login where type_depense = Vacances_fixes",
-"Restaurant" =>  $sql="SELECT montant from $login where type_depense = Restaurant_fixes",
-"Cinema" =>  $sql="SELECT montant from $login where type_depense = Cinema_fixes",
-"autreOccasionnelles" =>  $sql="SELECT montant from $login where type_depense = autreOccasionnelles_fixes"]; ?>
+<?php $depense_Occasionnelles = ["Vetement" =>  $sql="SELECT montant from $login where type_depense = vetement" ,
+"cadeau" =>  $sql="SELECT montant from $login where type_depense = cadeau",
+"voiture" =>  $sql="SELECT montant from $login where type_depense = voiture",
+"vacances" =>  $sql="SELECT montant from $login where type_depense = vacances",
+"restaurant" =>  $sql="SELECT montant from $login where type_depense = restaurant",
+"cinema" =>  $sql="SELECT montant from $login where type_depense = cinema",
+"autreOccasionnelle" =>  $sql="SELECT montant from $login where type_depense = autreOccasionnelle"]; ?>
 
 
 <form action="prevision.php" method="GET">
@@ -87,13 +85,14 @@ if (isset($_SERVER['REQUEST_METHOD']) && ($_SERVER["REQUEST_METHOD"] == 'GET') &
 <table>
     <thead>
         Details des depenses mensuelles
+        <?php if (!isset($mois)){$mois=date('Y-m')."-01"; echo "<br>Dépense du mois en cours";};?>
     </thead>
     <tbody>
         <tr>
             <th>Depenses totales</th>
         <td>
             <?php
-            if (!isset($mois)){$mois="";};
+           
          $sql = "select SUM(montant_depense_number) as montant_total from $login where date_depense between '$mois' AND '$mois'+INTERVAL 1 MONTH;";
 
         $result = mysqli_query($conn, $sql);
@@ -117,6 +116,7 @@ $sum=0.0;
 $decompte = mysqli_num_rows($result);
 while ($decompte > 0) {
     $row = mysqli_fetch_assoc($result);
+    var_dump($row);
     foreach ($depense_fixes as $key => $value_type) {
         if ($row['fixe']==$key){
             $sqlbis = "select SUM(montant_depense_number) as somme_fixe from $login where type_depense = \"$row[fixe]\" ;";                   
@@ -139,6 +139,7 @@ echo $sum;
             $result = mysqli_query($conn, $sql);
             $sum=0.0;
             $decompte = mysqli_num_rows($result);
+            var_dump($decompte);
             while ($decompte > 0) {
                 $row = mysqli_fetch_assoc($result);
                 foreach ($depense_Courante as $key => $value_type) {
@@ -163,6 +164,7 @@ echo $sum;
             $result = mysqli_query($conn, $sql);
             $sum=0.0;
             $decompte = mysqli_num_rows($result);
+            var_dump($decompte);
             while ($decompte > 0) {
                 $row = mysqli_fetch_assoc($result);
                 foreach ($depense_Occasionnelles as $key => $value_type) {
@@ -195,6 +197,8 @@ echo $sum;
     </tbody>
 </table>
 <div><a href="plan.php"> Modifier le budget mensuel </a></div>
-	
+
+<!--footer-->
+<?php include './../scr/footer.php'; ?>
 </body>
 </html>

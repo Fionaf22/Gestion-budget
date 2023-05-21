@@ -5,20 +5,19 @@
     <meta charset="utf-8" />
     <link href="./../styles/creationCompte.css" rel="stylesheet" />
     <link href="./../styles/header.css" rel="stylesheet"/>
+    <link href="./../styles/footer.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Sign up - The worrisome optimist</title>
   </head>
 
   <body>
-    <header class="HeaderHomepage">
-		  <div class="nav_bar">
-			  <?php include './../scr/menu.php';?>
-		  </div>
-		  <div class="middle_header">
-			  <div class="search_bar"><form><input type="text" placeholder="Search.."></form></div>
-			  <h1 class="main_title">The worrisome optimist</h1>
-		  </div>
-      <div class="picture_logo_header"><a href="./../Main/home-page.php"><img src="./../Main/logo_home.png" title="The worrisome optimist" alt="logo du site" > </a></div>
-    </header>
+  <header class="HeaderHomepage">
+
+<?php include './../scr/menu.php';?>
+  
+</header>
 
     <div>
       <h2>Configuration utilisateur</h2>
@@ -124,6 +123,7 @@
     </form>
 
 
-
+<!--footer-->
+<?php include './../scr/footer.php'; ?>
   </body>
 </html>
